@@ -23,7 +23,7 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, float mileageLim) {
+    public Vehicle(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, double mileageLim) {
         this.vehicleId = vehicleId;
         this.carModel = carModel;
         this.color = color;
@@ -66,8 +66,8 @@ public class Vehicle {
         this.fuelType = fuelType;
     }
 
-    public boolean isAutomatic() {
-        return isAutomatic;
+    public String isAutomatic() {
+        return isAutomatic ? "Automatic" : "Manual";
     }
 
     public void setTransType(boolean transType) {

@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Sedan extends Vehicle implements rent, payment{
     public boolean canOffRoad;
 
-    public Sedan(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, float mileageLim, boolean canOffRoad) {
+    public Sedan(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, double mileageLim, boolean canOffRoad) {
         super(vehicleId, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim);
         this.canOffRoad = canOffRoad;
     }
@@ -14,8 +14,8 @@ public class Sedan extends Vehicle implements rent, payment{
         super();
     }
 
-    public boolean isCanOffRoad() {
-        return canOffRoad;
+    public String isCanOffRoad() {
+        return canOffRoad ? "Capable" : "Incapable";
     }
 
     @Override
