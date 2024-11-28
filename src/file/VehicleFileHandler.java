@@ -53,17 +53,41 @@ public class VehicleFileHandler extends FileManager {
         try (BufferedReader br = new BufferedReader(new FileReader(vehicleListFile))){
             ArrayList<String> stringList = new ArrayList<>();
             String strLine;
+            long vehicleID = 0;
+            String carModel = "";     //brand
+            String modelId = "";
+            String color = "";        // Red, White, Blue, Yellow, Black, Pink, Green
+            String fuelType = "";     // Diesel, Unleaded, High Octane
+            boolean isAutomatic = false;
+            int passLim = 0;
+            double mileageLim = 0;
+            double basePrice = 0;
+            boolean isRented = false;
             while ((strLine = br.readLine()) != null) {
-                int start = strLine.lastIndexOf(" ");
-                int end = strLine.indexOf(",");
 
                 if (strLine.isEmpty()) {
+                    vehicleList.add(new Vehicle(vehicleID, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim, basePrice, isRented));
+                    continue;
                 }
 
-                if (start != -1 && end != -1) {
-                    String property = strLine.substring(start+1, end);
-                    stringList.add(property);
+                String[] buffer = strLine.split(":");
+                String key = buffer[0].trim();
+                String value = buffer[1].trim();
+
+                switch (key) {
+                    case "vehicleId" -> vehicleID = Long.parseLong(value);
+                    case  "carModel" -> carModel = value;
+                    case  "modelId" -> modelId = value;
+                    case  "color" -> color = value;
+                    case  "fuelType" -> fuelType = value;
+                    case  "isAutomatic" -> isAutomatic = Boolean.parseBoolean(value);
+                    case  "passLim" -> passLim = Integer.parseInt(value);
+                    case  "mileageLim" -> mileageLim = Double.parseDouble(value);
+                    case  "basePrice" -> basePrice = Double.parseDouble(value);
+                    case  "isRented" -> isRented = Boolean.parseBoolean(value);
+                    default -> throw new IllegalStateException("Unexpected value: " + key);
                 }
+
             }
 
 //            for (String string : stringList) {
