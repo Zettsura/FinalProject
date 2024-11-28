@@ -48,13 +48,17 @@ public class VehicleFileHandler extends FileManager {
     }
 
     public ArrayList<Vehicle> load() {
-        ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        ArrayList<Vehicle> vehicleList = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(vehicleListFile))){
-            ArrayList<String> stringList = new ArrayList<String>();
+            ArrayList<String> stringList = new ArrayList<>();
             String strLine;
             while ((strLine = br.readLine()) != null) {
                 int start = strLine.lastIndexOf(" ");
                 int end = strLine.indexOf(",");
+
+                if (strLine.isEmpty()) {
+                }
 
                 if (start != -1 && end != -1) {
                     String property = strLine.substring(start+1, end);
@@ -62,10 +66,9 @@ public class VehicleFileHandler extends FileManager {
                 }
             }
 
-            for (String string : stringList) {
-                System.out.println(string);
-            }
-
+//            for (String string : stringList) {
+//                System.out.println(string);
+//            }
 
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
