@@ -2,9 +2,9 @@ import vehicle.*;
 
 public class Main {
     public static void main (String[] args) {
-        Sedan sedan1 = new Sedan(102412412L, "Suzuki", "Red", "Gasoline", false, "1.3-CLE-CVT", 5, 523.42, true);
-        Sedan sedan2 = new Sedan(102423415L, "Tonda", "Black", "Gasoline", true, "2025-Tivic-Sport-Sedan", 5, 643.73, true);
-        Sedan sedan3 = new Sedan(102473345L, "Pooschie", "Blue", "Gasoline", true, "Panamera", 5, 895.152, false);
+        Vehicle sedan1 = new Vehicle(102412412L, "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", false, 5, 523.42, 2000.1, true, false, 200.1, 0, 500, 300, false);
+        Vehicle sedan2 = new Vehicle(102423415L, "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", true, 5, 643.73, 1234.1, false, true, 0, 0, 10, 400, false);
+        Vehicle sedan3 = new Vehicle(102473345L, "Pooschie", "Panamera", "Blue", "Diesel", true, 5, 895.152, 5000.1, false, true, 0, 0, 20, 200, true);
         String vehicleId = "Vehicle Id", carModel = "Model", color = "Color", fuelType = "Fuel Type", isAutomatic = "Transmission Type", modelId = "Model Id", passLim = "Passenger Limit", mileageLim = "Mileage Limit", canOffRoad = "Off Road Capability";
         System.out.println("Sedan");
         System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%n", vehicleId, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim, canOffRoad);

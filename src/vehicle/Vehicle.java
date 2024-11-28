@@ -1,13 +1,5 @@
 package vehicle;
 
-interface payment{
-
-}
-interface rent{
-    public void calcRent(Vehicle car);
-}
-
-
 public class Vehicle {
     public long vehicleId;      // Id ng shop
     public String carModel;     //brand
@@ -19,19 +11,31 @@ public class Vehicle {
     public double mileageLim;
     public double basePrice;
     public boolean isRented;
+    public boolean canOffRoad;
+    public double towingCap;
+    public double truckBedCap;
+    public int torque;
+    public int storageLim;
+    public boolean hasExtraSeats;
 
-    public Vehicle() {
-    }
-
-    public Vehicle(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, double mileageLim, double basePrice, boolean isRented) {
+    public Vehicle(long vehicleId, String carModel, String modelId, String color, String fuelType, boolean isAutomatic, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
         this.vehicleId = vehicleId;
+        //Add car type
         this.carModel = carModel;
+        this.modelId = modelId;
         this.color = color;
         this.fuelType = fuelType;
         this.isAutomatic = isAutomatic;
-        this.modelId = modelId;
         this.passLim = passLim;
         this.mileageLim = mileageLim;
+        this.basePrice = basePrice;
+        this.isRented = isRented;
+        this.canOffRoad = canOffRoad; //special
+        this.towingCap = towingCap; //special
+        this.truckBedCap = truckBedCap; //special
+        this.torque = torque;
+        this.storageLim = storageLim;
+        this.hasExtraSeats = hasExtraSeats;
     }
 
     public long getVehicleId() {
@@ -48,6 +52,14 @@ public class Vehicle {
 
     public void setCarModel(String carModel) {
         this.carModel = carModel;
+    }
+
+    public String getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(String modelId) {
+        this.modelId = modelId;
     }
 
     public String getColor() {
@@ -67,19 +79,11 @@ public class Vehicle {
     }
 
     public String isAutomatic() {
-        return isAutomatic ? "Automatic" : "Manual";
+        return canOffRoad ? "Automatic" : "Manual";
     }
 
-    public void setTransType(boolean transType) {
-        this.isAutomatic = transType;
-    }
-
-    public String getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(String modelId) {
-        this.modelId = modelId;
+    public void setAutomatic(boolean automatic) {
+        isAutomatic = automatic;
     }
 
     public int getPassLim() {
@@ -102,12 +106,69 @@ public class Vehicle {
         return basePrice;
     }
 
-    public boolean isIsRented() {
+    public void setBasePrice(double basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public boolean isRented() {
         return isRented;
     }
 
-    public void setIsRented(boolean isRented) {
-        this.isRented = isRented;
+    public void setRented(boolean rented) {
+        isRented = rented;
+    }
+
+    public String isCanOffRoad() {
+        return canOffRoad ? "Capable" : "Incapable";
+    }
+
+    public void setCanOffRoad(boolean canOffRoad) {
+        this.canOffRoad = canOffRoad;
+    }
+
+    public String getTowingCap() {
+        if (this.towingCap == 0)
+            return "-";
+        else
+            return Double.toString(towingCap);
+    }
+
+    public void setTowingCap(double towingCap) {
+        this.towingCap = towingCap;
+    }
+
+    public String getTruckBedCap() {
+        if (this.truckBedCap == 0)
+            return "-";
+        else
+            return Double.toString(truckBedCap);
+    }
+
+    public void setTruckBedCap(double truckBedCap) {
+        this.truckBedCap = truckBedCap;
+    }
+
+    public int getTorque() {
+        return torque;
+    }
+
+    public void setTorque(int torque) {
+        this.torque = torque;
+    }
+
+    public int getStorageLim() {
+        return storageLim;
+    }
+
+    public void setStorageLim(int storageLim) {
+        this.storageLim = storageLim;
+    }
+
+    public String isHasExtraSeats() {
+        return hasExtraSeats ? "✅" : "❌";
+    }
+
+    public void setHasExtraSeats(boolean hasExtraSeats) {
+        this.hasExtraSeats = hasExtraSeats;
     }
 }
-
