@@ -6,7 +6,7 @@ public class Sedan extends Vehicle implements rent, payment{
     public boolean canOffRoad;
 
     public Sedan(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, double mileageLim, boolean canOffRoad) {
-        super(vehicleId, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim);
+        super(vehicleId, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim, 0, false);
         this.canOffRoad = canOffRoad;
     }
 

@@ -23,7 +23,7 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, double mileageLim) {
+    public Vehicle(long vehicleId, String carModel, String color, String fuelType, boolean isAutomatic, String modelId, int passLim, double mileageLim, double basePrice, boolean isRented) {
         this.vehicleId = vehicleId;
         this.carModel = carModel;
         this.color = color;
