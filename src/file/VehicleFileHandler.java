@@ -29,16 +29,16 @@ public class VehicleFileHandler extends FileManager {
         String test = "tes\nt";
         try (FileWriter fw = new FileWriter(vehicleListFile, true);){
             fw.write(
-                "vehicleId: "       + vehicle.vehicleId     + ",\n"
-                + "carModel: "      + vehicle.carModel      + ",\n"
-                + "modelId: "       + vehicle.modelId       + ",\n"
-                + "color: "         + vehicle.color         + ",\n"
-                + "fuelType: "      + vehicle.fuelType      + ",\n"
-                + "isAutomatic: "   + vehicle.isAutomatic   + ",\n"
-                + "passLim: "       + vehicle.passLim       + ",\n"
-                + "mileageLim: "    + vehicle.mileageLim    + ",\n"
-                + "basePrice: "     + vehicle.basePrice     + ",\n"
-                + "isRented: "      + vehicle.isRented      + ",\n"
+                "vehicleId: "       + vehicle.vehicleId     + "\n"
+                + "carModel: "      + vehicle.carModel      + "\n"
+                + "modelId: "       + vehicle.modelId       + "\n"
+                + "color: "         + vehicle.color         + "\n"
+                + "fuelType: "      + vehicle.fuelType      + "\n"
+                + "isAutomatic: "   + vehicle.isAutomatic   + "\n"
+                + "passLim: "       + vehicle.passLim       + "\n"
+                + "mileageLim: "    + vehicle.mileageLim    + "\n"
+                + "basePrice: "     + vehicle.basePrice     + "\n"
+                + "isRented: "      + vehicle.isRented      + "\n"
                 + "\n"
             );
 
