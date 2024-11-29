@@ -3,21 +3,15 @@ package auth;
 import file.UserFileHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Scanner;
 
 // TODO: Handle exceptions
 public class Authentication {
-    public static User getAuthenticatedUser() {
-        return authenticatedUser;
-    }
-
-    public static void setAuthenticatedUser(User authenticatedUser) {
-        Authentication.authenticatedUser = authenticatedUser;
-    }
 
     static private User authenticatedUser;
-    private final ArrayList<User> userList;
+    private final List<User> userList;
     private HashMap<String, User> userHashMap;
 
     public Authentication() {
@@ -39,14 +33,24 @@ public class Authentication {
                     default -> throw new RuntimeException();
                 }
             } catch (RuntimeException ex) {
-                // TODO: Handle exception
+                System.out.println("ERROR: " + ex.getMessage());
+                continue;
             }
+            break;
         }
     }
 
-    public Authentication(ArrayList<User> userList) {
+    public Authentication(List<User> userList) {
         this.userList = userList;
         populateMap();
+    }
+
+    public static User getAuthenticatedUser() {
+        return authenticatedUser;
+    }
+
+    public static void setAuthenticatedUser(User authenticatedUser) {
+        Authentication.authenticatedUser = authenticatedUser;
     }
 
     private void populateMap() {
@@ -58,6 +62,7 @@ public class Authentication {
 
     // TODO: Create prompt
     public void loginPrompt(Scanner sc) {
+        sc.nextLine();
         String email = sc.nextLine();
         String password = sc.nextLine();
 
@@ -66,6 +71,7 @@ public class Authentication {
 
     // TODO: Create prompt
     public void registerPrompt(Scanner sc) {
+        sc.nextLine();
         User newUser = new User();
         newUser.setEmail(sc.nextLine());
         newUser.setPassword(sc.nextLine());
@@ -82,6 +88,9 @@ public class Authentication {
         email = email.trim();
         password = password.trim();
         User user = userHashMap.get(email);
+        if (user == null){
+            return status;
+        }
         if (user.getPassword().equals(password)) {
             status = 0;
             setAuthenticatedUser(user);

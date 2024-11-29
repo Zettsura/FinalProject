@@ -4,6 +4,7 @@ import auth.User;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 // TODO: add explicit throw if file operation fails
 public class UserFileHandler extends FileManager {
@@ -24,24 +25,25 @@ public class UserFileHandler extends FileManager {
     }
 
     // TODO: Properly handle exceptions
-    static public void save(ArrayList<User> userList) {
-        for (User user : userList) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(userListFile))) {
-                bw.write("userId: " + user.getUserId() + "\n");
-                bw.write("name: " + user.getName() + "\n");
-                bw.write("email: " + user.getEmail() + "\n");
-                bw.write("password: " + user.getPassword() + "\n");
-                bw.write("userType: " + user.getUserType() + "\n");
-
+    static public void save(List<User> userList) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(userListFile, true))) {
+                for (User user : userList) {
+                    bw.write("userId: " + user.getUserId() + "\n");
+                    bw.write("name: " + user.getName() + "\n");
+                    bw.write("email: " + user.getEmail() + "\n");
+                    bw.write("password: " + user.getPassword() + "\n");
+                    bw.write("userType: " + user.getUserType() + "\n");
+                    bw.write("vehicleId: " + user.getVehicleId() + "\n");
+                    bw.write("\n");
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
     }
 
     // TODO: Properly handle exceptions
-    public ArrayList<User> load() {
-        ArrayList<User> userList = new ArrayList<>();
+    public List<User> load() {
+        List<User> userList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(userListFile))) {
             User user = new User();
             String line;
@@ -62,6 +64,7 @@ public class UserFileHandler extends FileManager {
                     case "email" -> user.setEmail(value);
                     case "password" -> user.setPassword(value);
                     case "userType" -> user.setUserType(value);
+                    case "vehicleId" -> user.setVehicleId(Long.parseLong(value));
                 }
             }
         } catch (FileNotFoundException e) {

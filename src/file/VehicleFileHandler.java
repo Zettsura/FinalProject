@@ -4,10 +4,12 @@ import vehicle.Vehicle;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 // TODO: add explicit throw if file operation fails
 public class VehicleFileHandler extends FileManager {
     private static File vehicleListFile;
+
     public VehicleFileHandler() {
         super();
         vehicleListFile = new File(getFilePath() + "/vehicle_list.txt");
@@ -22,35 +24,36 @@ public class VehicleFileHandler extends FileManager {
     }
 
     // TODO: Properly handle exceptions
-    static public void save(ArrayList<Vehicle> vehicleList) {
-        for (Vehicle vehicle : vehicleList) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(vehicleListFile, true))) {
-                bw.write("vehicleId: "      + vehicle.getVehicleId()        + "\n");
-                bw.write("carModel: "       + vehicle.getCarModel()         + "\n");
-                bw.write("modelId: "        + vehicle.getModelId()          + "\n");
-                bw.write("color: "          + vehicle.getColor()            + "\n");
-                bw.write("fuelType: "       + vehicle.getFuelType()         + "\n");
-                bw.write("transmissionType" + vehicle.getTransmissionType() + "\n");
-                bw.write("passLim: "        + vehicle.getPassLim()          + "\n");
-                bw.write("mileageLim: "     + vehicle.getMileageLim()       + "\n");
-                bw.write("basePrice: "      + vehicle.getBasePrice()        + "\n");
-                bw.write("isRented: "       + vehicle.getIsRented()         + "\n");
-                bw.write("canOffRoad"       + vehicle.isCanOffRoad()        + "\n");
-                bw.write("towingCap"        + vehicle.getTowingCap()        + "\n");
-                bw.write("truckBedCap"      + vehicle.getTruckBedCap()      + "\n");
-                bw.write("torque"           + vehicle.getTorque()           + "\n");
-                bw.write("storageLim"       + vehicle.getStorageLim()       + "\n");
-                bw.write("hasExtraSeats"    + vehicle.isHasExtraSeats()     + "\n");
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+    static public void save(List<Vehicle> vehicleList) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(vehicleListFile))) {
+            for (Vehicle vehicle : vehicleList) {
+                bw.write("vehicleId: "        + vehicle.getVehicleId()        + "\n");
+                bw.write("carModel: "         + vehicle.getCarModel()         + "\n");
+                bw.write("modelId: "          + vehicle.getModelId()          + "\n");
+                bw.write("color: "            + vehicle.getColor()            + "\n");
+                bw.write("fuelType: "         + vehicle.getFuelType()         + "\n");
+                bw.write("transmissionType: " + vehicle.getTransmissionType() + "\n");
+                bw.write("passLim: "          + vehicle.getPassLim()          + "\n");
+                bw.write("mileageLim: "       + vehicle.getMileageLim()       + "\n");
+                bw.write("basePrice: "        + vehicle.getBasePrice()        + "\n");
+                bw.write("isRented: "         + vehicle.getIsRented()         + "\n");
+                bw.write("canOffRoad: "       + vehicle.isCanOffRoad()        + "\n");
+                bw.write("towingCap: "        + vehicle.getTowingCap()        + "\n");
+                bw.write("truckBedCap: "      + vehicle.getTruckBedCap()      + "\n");
+                bw.write("torque: "           + vehicle.getTorque()           + "\n");
+                bw.write("storageLim: "       + vehicle.getStorageLim()       + "\n");
+                bw.write("hasExtraSeats: "    + vehicle.isHasExtraSeats()     + "\n");
+                bw.write("\n");
             }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     // TODO: Properly handle exceptions
-    public ArrayList<Vehicle> load() {
-        ArrayList<Vehicle> vehicleList = new ArrayList<>();
+    public List<Vehicle> load() {
+        List<Vehicle> vehicleList = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(vehicleListFile))){
             String strLine;
@@ -69,15 +72,15 @@ public class VehicleFileHandler extends FileManager {
 
                 switch (key) {
                     case "vehicleId" -> temp.setVehicleId(Long.parseLong(value));
-                    case  "carModel" -> temp.setCarModel(value);
-                    case  "modelId" -> temp.setModelId(value);
-                    case  "color" -> temp.setColor(value);
-                    case  "fuelType" -> temp.setFuelType(value);
-                    case  "transmissionType" -> temp.setTransmissionType(value);
-                    case  "passLim" -> temp.setPassLim(Integer.parseInt(value));
-                    case  "mileageLim" -> temp.setMileageLim(Double.parseDouble(value));
-                    case  "basePrice" -> temp.setBasePrice(Double.parseDouble(value));
-                    case  "isRented" -> temp.setIsRented(Boolean.parseBoolean(value));
+                    case "carModel" -> temp.setCarModel(value);
+                    case "modelId" -> temp.setModelId(value);
+                    case "color" -> temp.setColor(value);
+                    case "fuelType" -> temp.setFuelType(value);
+                    case "transmissionType" -> temp.setTransmissionType(value);
+                    case "passLim" -> temp.setPassLim(Integer.parseInt(value));
+                    case "mileageLim" -> temp.setMileageLim(Double.parseDouble(value));
+                    case "basePrice" -> temp.setBasePrice(Double.parseDouble(value));
+                    case "isRented" -> temp.setIsRented(Boolean.parseBoolean(value));
                     case "canOffRoad" -> temp.setCanOffRoad(Boolean.parseBoolean(value));
                     case "towingCap" -> temp.setTowingCap(Double.parseDouble(value));
                     case "truckBedCap" -> temp.setTruckBedCap(Double.parseDouble(value));
