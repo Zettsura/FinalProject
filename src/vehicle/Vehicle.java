@@ -6,7 +6,7 @@ public class Vehicle {
     private String modelId;
     private String color;        // Red, White, Blue, Yellow, Black, Pink, Green
     private String fuelType;     // Diesel, Unleaded, High Octane
-    private boolean isAutomatic;
+    private String transmissionType;
     private int passLim;
     private double mileageLim;
     private double basePrice;
@@ -21,14 +21,14 @@ public class Vehicle {
     public Vehicle(){
     };
 
-    public Vehicle(long vehicleId, String carModel, String modelId, String color, String fuelType, boolean isAutomatic, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
+    public Vehicle(long vehicleId, String carModel, String modelId, String color, String fuelType, String transmissionType, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
         this.vehicleId = vehicleId;
         //Add car type
         this.carModel = carModel;
         this.modelId = modelId;
         this.color = color;
         this.fuelType = fuelType;
-        this.isAutomatic = isAutomatic;
+        this.transmissionType = transmissionType;
         this.passLim = passLim;
         this.mileageLim = mileageLim;
         this.basePrice = basePrice;
@@ -39,19 +39,6 @@ public class Vehicle {
         this.torque = torque;
         this.storageLim = storageLim;
         this.hasExtraSeats = hasExtraSeats;
-    }
-
-    public String[] properties() {
-        String[] attributes = new String[] {
-                String.valueOf(vehicleId),
-                carModel,
-                color,
-                fuelType,
-                modelId,
-                String.valueOf(passLim),
-                String.valueOf(mileageLim)
-        };
-        return attributes;
     }
 
     public long getVehicleId() {
@@ -94,16 +81,12 @@ public class Vehicle {
         this.fuelType = fuelType;
     }
 
-    public String isAutomatic() {
-        return canOffRoad ? "Automatic" : "Manual";
+    public String getTransmissionType() {
+        return transmissionType;
     }
 
-    public boolean getIsAutomatic() {
-        return isAutomatic;
-    }
-
-    public void setIsAutomatic(boolean automatic) {
-        isAutomatic = automatic;
+    public void setTransmissionType(String transmissionType) {
+        this.transmissionType = transmissionType;
     }
 
     public int getPassLim() {

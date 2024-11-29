@@ -25,16 +25,16 @@ public class VehicleFileHandler extends FileManager {
     static public void save(ArrayList<Vehicle> vehicleList) {
         for (Vehicle vehicle : vehicleList) {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(vehicleListFile, true))) {
-                bw.write("vehicleId: "   + vehicle.getVehicleId()   + "\n");
-                bw.write("carModel: "    + vehicle.getCarModel()    + "\n");
-                bw.write("modelId: "     + vehicle.getModelId()     + "\n");
-                bw.write("color: "       + vehicle.getColor()       + "\n");
-                bw.write("fuelType: "    + vehicle.getFuelType()    + "\n");
-                bw.write("isAutomatic: " + vehicle.getIsAutomatic() + "\n");
-                bw.write("passLim: "     + vehicle.getPassLim()     + "\n");
-                bw.write("mileageLim: "  + vehicle.getMileageLim()  + "\n");
-                bw.write("basePrice: "   + vehicle.getBasePrice()   + "\n");
-                bw.write("isRented: "    + vehicle.getIsRented()    + "\n");
+                bw.write("vehicleId: "      + vehicle.getVehicleId()        + "\n");
+                bw.write("carModel: "       + vehicle.getCarModel()         + "\n");
+                bw.write("modelId: "        + vehicle.getModelId()          + "\n");
+                bw.write("color: "          + vehicle.getColor()            + "\n");
+                bw.write("fuelType: "       + vehicle.getFuelType()         + "\n");
+                bw.write("transmissionType" + vehicle.getTransmissionType() + "\n");
+                bw.write("passLim: "        + vehicle.getPassLim()          + "\n");
+                bw.write("mileageLim: "     + vehicle.getMileageLim()       + "\n");
+                bw.write("basePrice: "      + vehicle.getBasePrice()        + "\n");
+                bw.write("isRented: "       + vehicle.getIsRented()         + "\n");
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -67,7 +67,7 @@ public class VehicleFileHandler extends FileManager {
                     case  "modelId" -> temp.setModelId(value);
                     case  "color" -> temp.setColor(value);
                     case  "fuelType" -> temp.setFuelType(value);
-                    case  "isAutomatic" -> temp.setIsAutomatic(Boolean.parseBoolean(value));
+                    case  "transmissionType" -> temp.setTransmissionType(value);
                     case  "passLim" -> temp.setPassLim(Integer.parseInt(value));
                     case  "mileageLim" -> temp.setMileageLim(Double.parseDouble(value));
                     case  "basePrice" -> temp.setBasePrice(Double.parseDouble(value));
