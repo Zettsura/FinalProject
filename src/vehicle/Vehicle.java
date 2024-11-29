@@ -13,11 +13,11 @@ public class Vehicle {
     private double basePrice;
     private boolean isRented;
     private boolean canOffRoad;
-    private double towingCap;
-    private double truckBedCap;
+    private double towingCap; //truck
+    private double truckBedCap; //truck
     private int torque;
     private int storageLim;
-    private boolean hasExtraSeats;
+    private boolean hasExtraSeats; //van
 
     public Vehicle(){
     };
@@ -184,5 +184,36 @@ public class Vehicle {
 
     public void setHasExtraSeats(boolean hasExtraSeats) {
         this.hasExtraSeats = hasExtraSeats;
+    }
+
+    public double rent(double mileageLim){//sedan
+        if (mileageLim < 0)
+            throw new IllegalArgumentException("Mileage limit is 0, that is wrong");
+        if (mileageLim > 50)
+            basePrice+=((mileageLim-50)*0.02);
+
+        return basePrice;
+    }
+    public double rent(double mileageLim, boolean hasExtraSeats){ //van
+        if (mileageLim < 0)
+            throw new IllegalArgumentException("Mileage limit is 0, that is wrong");
+        if (mileageLim > 50)
+            basePrice+=((mileageLim-50)*0.02);
+        if (hasExtraSeats)
+            basePrice *= 1.4;
+
+        return  basePrice;
+    }
+    public double rent(double mileageLim, double towingCap, double bedCap){ //truck
+        if (mileageLim < 0)
+            throw new IllegalArgumentException("Mileage limit is 0, that is wrong");
+        if (mileageLim > 50)
+            basePrice+=((mileageLim-50)*0.02);
+        if (towingCap > 500)
+            basePrice+=((towingCap-500)*0.05);
+        if (bedCap > 1.33)
+            basePrice+=((bedCap - 1.33)*0.05);
+
+        return  basePrice;
     }
 }
