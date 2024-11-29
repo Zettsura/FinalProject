@@ -1,5 +1,9 @@
 package auth;
 
+/**
+ * TODO
+ *  - Add property for vehicleId of currently renting car
+ */
 public class User {
     private long userId;
     private String name;
