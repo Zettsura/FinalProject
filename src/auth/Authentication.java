@@ -5,6 +5,7 @@ import file.UserFileHandler;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 // TODO: Handle exceptions
 public class Authentication {
@@ -77,7 +78,7 @@ public class Authentication {
         newUser.setName(sc.nextLine());
 
         newUser.setUserType("Customer");
-        newUser.setUserId(1);           // TODO: Create ID generator
+        newUser.setUserId(ThreadLocalRandom.current().nextLong(10000,99999));           // TODO: Create ID generator
         register(newUser);
     }
 
