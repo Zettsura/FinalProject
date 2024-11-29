@@ -47,6 +47,10 @@ public class Rent {
         }
     }
 
+    public void updateRentedVehicleList() {
+        rentedVehicleList = vehicleList.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
+    }
+
     public boolean checkAvailVehicle(Vehicle vehicleList){
         if(!(vehicleList != vehicleList)) {
             return true;
