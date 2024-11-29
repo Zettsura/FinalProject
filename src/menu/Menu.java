@@ -245,6 +245,7 @@ public class Menu {
         }
     }
 
+
     public void filterCars(){
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
         while(true) {
