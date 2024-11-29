@@ -32,7 +32,6 @@ public class UserFileHandler extends FileManager {
                     bw.write("name: " + user.getName() + "\n");
                     bw.write("email: " + user.getEmail() + "\n");
                     bw.write("password: " + user.getPassword() + "\n");
-                    bw.write("userType: " + user.getUserType() + "\n");
                     bw.write("vehicleId: " + user.getVehicleId() + "\n");
                     bw.write("\n");
                 }
@@ -63,7 +62,6 @@ public class UserFileHandler extends FileManager {
                     case "name" -> user.setName(value);
                     case "email" -> user.setEmail(value);
                     case "password" -> user.setPassword(value);
-                    case "userType" -> user.setUserType(value);
                     case "vehicleId" -> user.setVehicleId(Long.parseLong(value));
                 }
             }

@@ -20,14 +20,14 @@ import vehicle.*;
 
 public class Rent {
     private List<Vehicle> vehicleList;
-    private List<Vehicle> rentedVehicleList;
+    private List<Vehicle> availableVehicleList;
     private HashMap<Long, Vehicle> vehicleHashMap;
     private java.time.LocalTime dateRented = java.time.LocalTime.now();
 
     public Rent() {}
     public Rent(List<Vehicle> vehicles) {
         vehicleList = vehicles;
-        rentedVehicleList = vehicles.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
+        availableVehicleList = vehicles.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
         vehicleHashMap = new HashMap<>(vehicles.stream().collect(Collectors.toMap(Vehicle::getVehicleId, vehicle -> vehicle)));
     }
 
@@ -48,7 +48,7 @@ public class Rent {
     }
 
     public void updateRentedVehicleList() {
-        rentedVehicleList = vehicleList.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
+        availableVehicleList = vehicleList.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
     }
 
     public boolean checkAvailVehicle(Vehicle vehicleList){

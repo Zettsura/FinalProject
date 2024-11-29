@@ -78,7 +78,7 @@ public class Authentication {
         newUser.setName(sc.nextLine());
 
         newUser.setUserType("Customer");
-        newUser.setUserId(ThreadLocalRandom.current().nextLong(10000,99999));           // TODO: Create ID generator
+        newUser.setUserId(ThreadLocalRandom.current().nextLong(10000,99999));
         register(newUser);
     }
 

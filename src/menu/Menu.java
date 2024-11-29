@@ -117,7 +117,6 @@ public class Menu {
     public void displayRentedCars(){
         System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%n", vehicleId, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim, canOffRoad);
 
-
     }
 
     public void rentACar(){
