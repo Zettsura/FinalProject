@@ -43,7 +43,7 @@ public class Menu {
             String opt = inp.nextLine();
             switch(opt) {
                 case "A": case "a":
-                    
+
                     break;
                 case "B": case "b":
                     break;
