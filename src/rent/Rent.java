@@ -44,10 +44,11 @@ public class Rent {
         if (vehicle != null) {
             vehicle.setIsRented(true);
             Authentication.getAuthenticatedUser().setVehicleId(vehicleId);
+            updateRentedVehicleList();
         }
     }
 
-    public void updateRentedVehicleList() {
+    private void updateRentedVehicleList() {
         availableVehicleList = vehicleList.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
     }
 
