@@ -2,6 +2,7 @@ package vehicle;
 
 public class Vehicle {
     private long vehicleId;      // Id ng shop
+    private String carType;
     private String carModel;     //brand
     private String modelId;
     private String color;        // Red, White, Blue, Yellow, Black, Pink, Green
@@ -21,9 +22,9 @@ public class Vehicle {
     public Vehicle(){
     };
 
-    public Vehicle(long vehicleId, String carModel, String modelId, String color, String fuelType, String transmissionType, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
+    public Vehicle(long vehicleId, String carType, String carModel, String modelId, String color, String fuelType, String transmissionType, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
         this.vehicleId = vehicleId;
-        //Add car type
+        this.carType = carType;
         this.carModel = carModel;
         this.modelId = modelId;
         this.color = color;
@@ -33,9 +34,9 @@ public class Vehicle {
         this.mileageLim = mileageLim;
         this.basePrice = basePrice;
         this.isRented = isRented;
-        this.canOffRoad = canOffRoad; //special
-        this.towingCap = towingCap; //special
-        this.truckBedCap = truckBedCap; //special
+        this.canOffRoad = canOffRoad;
+        this.towingCap = towingCap;
+        this.truckBedCap = truckBedCap;
         this.torque = torque;
         this.storageLim = storageLim;
         this.hasExtraSeats = hasExtraSeats;
@@ -44,6 +45,10 @@ public class Vehicle {
     public long getVehicleId() {
         return vehicleId;
     }
+
+    public String getCarType() {return carType;}
+
+    public void setCarType(String carType) {this.carType = carType;}
 
     public void setVehicleId(long vehicleId) {
         this.vehicleId = vehicleId;
