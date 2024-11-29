@@ -3,7 +3,7 @@ import vehicle.*;
 import rent.Rent;
 import java.util.List;
 import auth.*;
-
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -37,8 +37,8 @@ public class Menu {
             System.out.println("| [3] Exit        |");
             System.out.println("+-----------------+");
             System.out.print("ENTER:");
-            int opt = inp.nextInt();
                 try {
+                    int opt = inp.nextInt();
                     switch (opt) {
                         case 1 -> auth.loginPrompt(inp);
                         case 2 -> auth.registerPrompt(inp);
@@ -48,15 +48,18 @@ public class Menu {
                 } catch (AuthenticationException ex) {
                     System.out.println("ERROR: " + ex.getMessage());
                     continue;
+                } catch (InputMismatchException ex){
+                    inp.nextLine();
+                    System.out.println("ERROR: " + ex.getMessage());
+                    continue;
                 } catch (RuntimeException ex) {
                     System.out.println("ERROR: " + ex.getMessage());
                     continue;
                 }
                 break;
             }
-        assert Authentication.getAuthenticatedUser() != null;
-        System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName());
         }
+
 
     public void menuOptions(){
         System.out.println("++=================================================================================++");
@@ -94,9 +97,9 @@ public class Menu {
             System.out.println("++===================================++");
             System.out.println("++===================================++");
             System.out.println("ENTER: ");
+            try{
             String opt = inp.next();
-
-            switch (opt){
+            switch (opt) {
                 case "A": case "a":
                     displayCars();
                     break;
@@ -109,6 +112,9 @@ public class Menu {
                 case "D": case "d":
                     System.out.println("Are you sure? [Y/N]: ");
                     opt = inp.next();
+                    if (opt == "Y" || opt == "y")
+                        loginMenu();
+                    else if (opt == "N" || opt == "n")
                     if(Objects.equals(opt, "Y") || Objects.equals(opt, "y"))
                         System.exit(0);
                     else if(opt == "N" || opt == "n")
@@ -118,6 +124,9 @@ public class Menu {
                     break;
                 default:
                     System.out.println("ERROR: Invalid Option");
+                }
+            }catch(InputMismatchException ex){
+                System.out.println("ERROR: " + ex.getMessage());
             }
         }
     }
