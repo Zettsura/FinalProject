@@ -3,10 +3,10 @@ package file;
 import vehicle.Vehicle;
 
 import java.io.*;
+import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: add explicit throw if file operation fails
 public class VehicleFileHandler extends FileManager {
     private static File vehicleListFile;
 
@@ -14,16 +14,17 @@ public class VehicleFileHandler extends FileManager {
         super();
         vehicleListFile = new File(getFilePath() + "/vehicle_list.txt");
         try {
-            boolean status;
             if (!vehicleListFile.exists()) {
-                status = vehicleListFile.createNewFile();
+                boolean status = vehicleListFile.createNewFile();
+                if (!status) {
+                    throw new FileSystemException("The file user_list.txt already exists");
+                }
             }
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
     }
 
-    // TODO: Properly handle exceptions
     static public void save(List<Vehicle> vehicleList) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(vehicleListFile))) {
             for (Vehicle vehicle : vehicleList) {
@@ -52,7 +53,6 @@ public class VehicleFileHandler extends FileManager {
         }
     }
 
-    // TODO: Properly handle exceptions
     public List<Vehicle> load() {
         List<Vehicle> vehicleList = new ArrayList<>();
 

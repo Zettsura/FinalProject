@@ -4,13 +4,10 @@ import file.UserFileHandler;
 
 import java.util.List;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-// TODO: Handle exceptions
 public class Authentication {
-
     static private User authenticatedUser;
     private final List<User> userList;
     private HashMap<String, User> userHashMap;
@@ -41,7 +38,6 @@ public class Authentication {
         }
     }
 
-    // TODO: Create prompt
     public void loginPrompt(Scanner sc) throws AuthenticationException {
         sc.nextLine();
         System.out.print("Email: ");
@@ -56,7 +52,6 @@ public class Authentication {
 
     }
 
-    // TODO: Create prompt
     public void registerPrompt(Scanner sc) {
         sc.nextLine();
         User newUser = new User();
@@ -71,7 +66,6 @@ public class Authentication {
         register(newUser);
     }
 
-    // TODO: Handle exceptions
     public int login(String email, String password) {
         int status = -1;
         email = email.trim();
@@ -87,7 +81,6 @@ public class Authentication {
         return status;
     }
 
-    // TODO: Handle exceptions
     public void register(User user) {
         userList.add(user);
         userHashMap.put(user.getEmail(), user);

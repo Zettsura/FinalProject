@@ -3,10 +3,10 @@ package file;
 import auth.User;
 
 import java.io.*;
+import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: add explicit throw if file operation fails
 public class UserFileHandler extends FileManager {
     private static File userListFile;
 
@@ -14,17 +14,17 @@ public class UserFileHandler extends FileManager {
         super();
         userListFile = new File(getFilePath() + "/user_list.txt");
         try {
-            boolean status;
             if (!userListFile.exists()) {
-                status = userListFile.createNewFile();
+                boolean status = userListFile.createNewFile();
+                if (!status) {
+                    throw new FileSystemException("The file user_list.txt already exists");
+                }
             }
-
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
     }
 
-    // TODO: Properly handle exceptions
     static public void save(List<User> userList) {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(userListFile, true))) {
                 for (User user : userList) {
@@ -40,7 +40,6 @@ public class UserFileHandler extends FileManager {
             }
     }
 
-    // TODO: Properly handle exceptions
     public List<User> load() {
         List<User> userList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(userListFile))) {
@@ -65,10 +64,10 @@ public class UserFileHandler extends FileManager {
                     case "vehicleId" -> user.setVehicleId(Long.parseLong(value));
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
 
         return userList;
