@@ -1,23 +1,21 @@
 package auth;
 
-/**
- * TODO
- *  - Add property for vehicleId of currently renting car
- */
 public class User {
     private long userId;
     private String name;
     private String email;
     private String password;
     private String userType;
+    private long vehicleId;
 
     public User(){}
-    public User(long userId, String name, String email, String password, String userType){
+    public User(long userId, String name, String email, String password, String userType, long vehicleId){
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.password = password;
         this.userType = userType;
+        this.vehicleId = vehicleId;
     }
 
     public String getName() {
@@ -58,6 +56,14 @@ public class User {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public long getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(long vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
 }
