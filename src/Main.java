@@ -12,9 +12,9 @@ public class Main {
         UserFileHandler ufh = new UserFileHandler();
 
         /// FOR TESTING
-        Vehicle sedan1 = new Vehicle(102412412L, "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0, 500, 300, false);
-        Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 643.73, 1234.1, false, true, 0, 0, 10, 400, false);
-        Vehicle sedan3 = new Vehicle(102473345L, "Sedan", "Pooschie", "Panamera", "Blue", "Diesel", "Manual", 5, 895.152, 5000.1, false, true, 0, 0, 20, 200, true);
+        Vehicle sedan1 = new Vehicle(102412412L, "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0.0, 500, 300, false);
+        Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 643.73, 1234.1, false, true, 0.0, 0.0, 10, 400, false);
+        Vehicle sedan3 = new Vehicle(102473345L, "Sedan", "Pooschie", "Panamera", "Blue", "Diesel", "Manual", 5, 895.152, 5000.1, false, true, 0.0, 0.0, 20, 200, true);
 
         List<Vehicle>  vehicles = new ArrayList<>();
         vehicles.add(sedan1);

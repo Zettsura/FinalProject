@@ -38,7 +38,7 @@ public class VehicleFileHandler extends FileManager {
                 bw.write("mileageLim: "       + vehicle.getMileageLim()       + "\n");
                 bw.write("basePrice: "        + vehicle.getBasePrice()        + "\n");
                 bw.write("isRented: "         + vehicle.getIsRented()         + "\n");
-                bw.write("canOffRoad: "       + vehicle.isCanOffRoad()        + "\n");
+                bw.write("canOffRoad: "       + vehicle.getCanOffRoad()       + "\n");
                 bw.write("towingCap: "        + vehicle.getTowingCap()        + "\n");
                 bw.write("truckBedCap: "      + vehicle.getTruckBedCap()      + "\n");
                 bw.write("torque: "           + vehicle.getTorque()           + "\n");

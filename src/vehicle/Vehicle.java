@@ -19,8 +19,7 @@ public class Vehicle {
     private int storageLim;
     private boolean hasExtraSeats; //van
 
-    public Vehicle(){
-    };
+    public Vehicle(){}
 
     public Vehicle(long vehicleId, String carType, String carBrand, String modelId, String color, String fuelType, String transmissionType, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
         this.vehicleId = vehicleId;
@@ -137,22 +136,16 @@ public class Vehicle {
         return this.canOffRoad;
     }
 
-    public String getTowingCap() {
-        if (this.towingCap == 0)
-            return "-";
-        else
-            return Double.toString(towingCap);
+    public double getTowingCap() {
+        return this.towingCap;
     }
 
     public void setTowingCap(double towingCap) {
         this.towingCap = towingCap;
     }
 
-    public String getTruckBedCap() {
-        if (this.truckBedCap == 0)
-            return "-";
-        else
-            return Double.toString(truckBedCap);
+    public double getTruckBedCap() {
+        return this.truckBedCap;
     }
 
     public void setTruckBedCap(double truckBedCap) {
