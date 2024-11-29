@@ -3,7 +3,7 @@ package vehicle;
 public class Vehicle {
     private long vehicleId;      // Id ng shop
     private String carType;
-    private String carModel;     //brand
+    private String carBrand;     //brand
     private String modelId;
     private String color;        // Red, White, Blue, Yellow, Black, Pink, Green
     private String fuelType;     // Diesel, Unleaded, High Octane
@@ -22,10 +22,10 @@ public class Vehicle {
     public Vehicle(){
     };
 
-    public Vehicle(long vehicleId, String carType, String carModel, String modelId, String color, String fuelType, String transmissionType, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
+    public Vehicle(long vehicleId, String carType, String carBrand, String modelId, String color, String fuelType, String transmissionType, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
         this.vehicleId = vehicleId;
         this.carType = carType;
-        this.carModel = carModel;
+        this.carBrand = carBrand;
         this.modelId = modelId;
         this.color = color;
         this.fuelType = fuelType;
@@ -54,12 +54,12 @@ public class Vehicle {
         this.vehicleId = vehicleId;
     }
 
-    public String getCarModel() {
-        return carModel;
+    public String getCarBrand() {
+        return carBrand;
     }
 
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
     }
 
     public String getModelId() {

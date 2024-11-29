@@ -8,7 +8,7 @@ public class Search {
         return  list.stream().filter(vehicle -> vehicle.getColor().equals(color)).toList();
     }
     public static List<Vehicle> filterByBrand(List<Vehicle> list, String brand) {
-        return  list.stream().filter(vehicle -> vehicle.getCarModel().equals(brand)).toList();
+        return  list.stream().filter(vehicle -> vehicle.getCarBrand().equals(brand)).toList();
     }
     public static List<Vehicle> filterByModel(List<Vehicle> list, String model) {
         return  list.stream().filter(vehicle -> vehicle.getModelId().equals(model)).toList();

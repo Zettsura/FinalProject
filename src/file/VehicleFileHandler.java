@@ -28,7 +28,8 @@ public class VehicleFileHandler extends FileManager {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(vehicleListFile))) {
             for (Vehicle vehicle : vehicleList) {
                 bw.write("vehicleId: "        + vehicle.getVehicleId()        + "\n");
-                bw.write("carModel: "         + vehicle.getCarModel()         + "\n");
+                bw.write("carType: "          + vehicle.getCarType()          + "\n");
+                bw.write("carBrand: "         + vehicle.getCarBrand()         + "\n");
                 bw.write("modelId: "          + vehicle.getModelId()          + "\n");
                 bw.write("color: "            + vehicle.getColor()            + "\n");
                 bw.write("fuelType: "         + vehicle.getFuelType()         + "\n");
@@ -42,7 +43,7 @@ public class VehicleFileHandler extends FileManager {
                 bw.write("truckBedCap: "      + vehicle.getTruckBedCap()      + "\n");
                 bw.write("torque: "           + vehicle.getTorque()           + "\n");
                 bw.write("storageLim: "       + vehicle.getStorageLim()       + "\n");
-                bw.write("hasExtraSeats: "    + vehicle.isHasExtraSeats()     + "\n");
+                bw.write("hasExtraSeats: "    + vehicle.getHasExtraSeats()    + "\n");
                 bw.write("\n");
             }
 
@@ -72,7 +73,8 @@ public class VehicleFileHandler extends FileManager {
 
                 switch (key) {
                     case "vehicleId" -> temp.setVehicleId(Long.parseLong(value));
-                    case "carModel" -> temp.setCarModel(value);
+                    case "carType" -> temp.setCarType(value);
+                    case "carBrand" -> temp.setCarBrand(value);
                     case "modelId" -> temp.setModelId(value);
                     case "color" -> temp.setColor(value);
                     case "fuelType" -> temp.setFuelType(value);
