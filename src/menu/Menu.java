@@ -2,6 +2,7 @@ package menu;
 import vehicle.*;
 import auth.*;
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  * TODO
@@ -20,40 +21,42 @@ import java.util.Scanner;
 public class Menu {
     public Scanner inp = new Scanner(System.in);
     private String vehicleId = "Vehicle Id", carModel = "Model", color = "Color", fuelType = "Fuel Type", isAutomatic = "Transmission Type", modelId = "Model Id", passLim = "Passenger Limit", mileageLim = "Mileage Limit", canOffRoad = "Off Road Capability";
-
     protected Vehicle sedan1 = new Vehicle(695783304L , "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0, 500, 300, false);
-    Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 643.73, 1234.1, false, true, 0, 0, 10, 400, false);
-    Vehicle sedan3 = new Vehicle(528692830L, "Sedan", "Pooschie", "Panamera", "Blue", "Diesel", "Manual", 5, 895.152, 5000.1, false, true, 0, 0, 20, 200, true);
-    Vehicle van1 = new Vehicle(229680265L, "Van", "Tonda", "2024-Tonda-ODYSSEY", "Pink", "Unleaded", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    Vehicle van2 = new Vehicle(232352365L, "Van", "Kyundai", "US4", "Green", "Diesel", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    Vehicle van3 = new Vehicle(433252976L, "Van", "Yoyota", "B721", "White", "Premium", "Automatic", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    Vehicle pickUp1 = new Vehicle(242097450L, "Pick-Up Truck", "Tord", "F150", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    Vehicle pickUp2 = new Vehicle(128952996L, "Pick-Up Truck", "Tord", "F160", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    Vehicle pickUp3 = new Vehicle(684529782L, "Pick-Up Truck", "Tord", "G987", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    protected Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 643.73, 1234.1, false, true, 0, 0, 10, 400, false);
+    protected Vehicle sedan3 = new Vehicle(528692830L, "Sedan", "Pooschie", "Panamera", "Blue", "Diesel", "Manual", 5, 895.152, 5000.1, false, true, 0, 0, 20, 200, true);
+    protected Vehicle van1 = new Vehicle(229680265L, "Van", "Tonda", "2024-Tonda-ODYSSEY", "Pink", "Unleaded", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    protected Vehicle van2 = new Vehicle(232352365L, "Van", "Kyundai", "US4", "Green", "Diesel", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    protected Vehicle van3 = new Vehicle(433252976L, "Van", "Yoyota", "B721", "White", "Premium", "Automatic", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    protected Vehicle pickUp1 = new Vehicle(242097450L, "Pick-Up Truck", "Tord", "F150", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    protected Vehicle pickUp2 = new Vehicle(128952996L, "Pick-Up Truck", "Tord", "F160", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    protected Vehicle pickUp3 = new Vehicle(684529782L, "Pick-Up Truck", "Tord", "G987", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
 
     public void loginMenu(){
         while(true) {
+            Authentication auth = new Authentication();
             System.out.println(" CAR RENTAL Log-In");
             System.out.println("+-----------------+");
-            System.out.println("| [A] Sign-In     |");
-            System.out.println("| [B] Sign-Up     |");
-            System.out.println("| [X]  Exit       |");
+            System.out.println("| [1] Sign-In     |");
+            System.out.println("| [2] Sign-Up     |");
+            System.out.println("| [3]  Exit       |");
             System.out.println("+-----------------+");
             System.out.print("ENTER:");
-            String opt = inp.nextLine();
-            switch(opt) {
-                case "A": case "a":
-
-                    break;
-                case "B": case "b":
-                    break;
-                case "X": case "x":
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid Input");
+            int opt = inp.nextInt();
+                try {
+                    switch (opt) {
+                        case 1 -> auth.loginPrompt(inp);
+                        case 2 -> auth.registerPrompt(inp);
+                        case 3 -> System.exit(0);
+                        default -> throw new RuntimeException();
+                    }
+                } catch (RuntimeException ex) {
+                    System.out.println("ERROR: " + ex.getMessage());
+                    continue;
+                }
+                break;
             }
         }
-    }
+
 
     public void menuOptions(){
         System.out.println("++=================================================================================++");
@@ -129,3 +132,6 @@ public class Menu {
 
     }
 }
+
+
+//System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%n", sedan1.getVehicleId(), sedan1.getCarBrand(), sedan1.getColor(), sedan1.getFuelType(), sedan1.isAutomatic(), sedan1.getModelId(), sedan1.getPassLim(), sedan1.getMileageLim(), sedan1.isCanOffRoad());

@@ -4,6 +4,7 @@ import file.UserFileHandler;
 
 import java.util.List;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -77,8 +78,7 @@ public class Authentication {
         newUser.setPassword(sc.nextLine());
         newUser.setName(sc.nextLine());
 
-        newUser.setUserType("Customer");
-        newUser.setUserId(ThreadLocalRandom.current().nextLong(10000,99999));
+        newUser.setUserId(1);           // TODO: Create ID generator
         register(newUser);
     }
 

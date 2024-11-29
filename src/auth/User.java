@@ -5,16 +5,14 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String userType;
     private long vehicleId;
 
     public User(){}
-    public User(long userId, String name, String email, String password, String userType, long vehicleId){
+    public User(long userId, String name, String email, String password, long vehicleId){
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.userType = userType;
         this.vehicleId = vehicleId;
     }
 
@@ -24,14 +22,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
     }
 
     public String getPassword() {
