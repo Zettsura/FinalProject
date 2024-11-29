@@ -48,12 +48,12 @@ public class Rent {
         }
     }
 
-    private void updateRentedVehicleList() {
+    public void updateRentedVehicleList() {
         availableVehicleList = vehicleList.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
     }
 
     public List<Vehicle> getRentedVehicleList(){
-        return rentedVehicleList;
+        return availableVehicleList;
     }
 
     public boolean checkAvailVehicle(Vehicle vehicleList){

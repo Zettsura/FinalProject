@@ -10,8 +10,6 @@ public class Main {
     public static void main (String[] args) {
         // Actual
         VehicleFileHandler vfh = new VehicleFileHandler();
-        Menu menu = new Menu();
-        menu.loginMenu();
 
         // FOR TESTING
         Vehicle sedan1 = new Vehicle(102412412L, "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0.0, 500, 300, false);
@@ -28,6 +26,10 @@ public class Main {
         for (Vehicle vehicle : filtered) {
             System.out.println(vehicle.getCarBrand() + " Color: " + vehicle.getColor());
         }
+
+        Menu menu = new Menu(vehicles);
+        menu.loginMenu();
+        menu.menuOptions();
 
 //        User user = new User(12L, "Adrian", "adrian@gmail.com", "1234", 12L);
 //        auth.register(user);
