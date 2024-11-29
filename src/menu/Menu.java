@@ -48,6 +48,9 @@ public class Menu {
                         case 3 -> System.exit(0);
                         default -> throw new RuntimeException();
                     }
+                } catch (AuthenticationException ex) {
+                    System.out.println("ERROR: " + ex.getMessage());
+                    continue;
                 } catch (RuntimeException ex) {
                     System.out.println("ERROR: " + ex.getMessage());
                     continue;

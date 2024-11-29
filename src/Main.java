@@ -1,3 +1,4 @@
+import menu.Menu;
 import vehicle.*;
 import file.*;
 import search.Search;
@@ -10,8 +11,8 @@ public class Main {
     public static void main (String[] args) {
         // Actual
         VehicleFileHandler vfh = new VehicleFileHandler();
-        UserFileHandler ufh = new UserFileHandler();
-        Authentication auth = new Authentication();
+        Menu menu = new Menu();
+        menu.loginMenu();
 
         // FOR TESTING
         Vehicle sedan1 = new Vehicle(102412412L, "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0.0, 500, 300, false);
@@ -29,9 +30,9 @@ public class Main {
             System.out.println(vehicle.getCarBrand() + " Color: " + vehicle.getColor());
         }
 
-        User user = new User(12L, "Adrian", "adrian@gmail.com", "1234", 12L);
-        auth.register(user);
-        auth.login("adrian@gmail.com", "1234");
-        System.out.println(Authentication.getAuthenticatedUser().getName());
+//        User user = new User(12L, "Adrian", "adrian@gmail.com", "1234", 12L);
+//        auth.register(user);
+//        auth.login("adrian@gmail.com", "1234");
+//        System.out.println(Authentication.getAuthenticatedUser().getName());
     }
 }

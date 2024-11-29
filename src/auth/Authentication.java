@@ -19,26 +19,6 @@ public class Authentication {
         UserFileHandler ufh = new UserFileHandler();
         userList = ufh.load();
         populateMap();
-
-        Scanner sc = new Scanner(System.in);
-        int choice = 0;
-        while (true) {
-
-            // TODO: Prompt for login/registration
-            System.out.println("1: login, 2: register: ");
-            try {
-                choice = sc.nextInt();
-                switch (choice) {
-                    case 1 -> loginPrompt(sc);
-                    case 2 -> registerPrompt(sc);
-                    default -> throw new RuntimeException();
-                }
-            } catch (RuntimeException ex) {
-                System.out.println("ERROR: " + ex.getMessage());
-                continue;
-            }
-            break;
-        }
     }
 
     public Authentication(List<User> userList) {
@@ -62,14 +42,18 @@ public class Authentication {
     }
 
     // TODO: Create prompt
-    public void loginPrompt(Scanner sc) {
+    public void loginPrompt(Scanner sc) throws AuthenticationException {
         sc.nextLine();
         System.out.println("Email: ");
         String email = sc.nextLine();
         System.out.println("Password: ");
         String password = sc.nextLine();
 
-        login(email, password);
+        int status = login(email, password);
+        if (status == -1) {
+            throw new AuthenticationException("Wrong username or password!");
+        }
+
     }
 
     // TODO: Create prompt
@@ -80,7 +64,7 @@ public class Authentication {
         newUser.setPassword(sc.nextLine());
         newUser.setName(sc.nextLine());
 
-        newUser.setUserId(1);           // TODO: Create ID generator
+        newUser.setUserId(ThreadLocalRandom.current().nextLong(10000, 99999));
         register(newUser);
     }
 
@@ -93,8 +77,8 @@ public class Authentication {
         if (user == null){
             return status;
         }
+
         if (user.getPassword().equals(password)) {
-            status = 0;
             setAuthenticatedUser(user);
         }
         return status;
@@ -107,6 +91,3 @@ public class Authentication {
         UserFileHandler.save(userList);
     };
 }
-
-
-
