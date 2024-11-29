@@ -27,7 +27,7 @@ class FileManager {
     }
 
     public void setFilePath(File filePath) {
-        this.filePath = filePath;
+        FileManager.filePath = filePath;
     }
 
 }

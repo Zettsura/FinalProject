@@ -35,6 +35,12 @@ public class VehicleFileHandler extends FileManager {
                 bw.write("mileageLim: "     + vehicle.getMileageLim()       + "\n");
                 bw.write("basePrice: "      + vehicle.getBasePrice()        + "\n");
                 bw.write("isRented: "       + vehicle.getIsRented()         + "\n");
+                bw.write("canOffRoad"       + vehicle.isCanOffRoad()        + "\n");
+                bw.write("towingCap"        + vehicle.getTowingCap()        + "\n");
+                bw.write("truckBedCap"      + vehicle.getTruckBedCap()      + "\n");
+                bw.write("torque"           + vehicle.getTorque()           + "\n");
+                bw.write("storageLim"       + vehicle.getStorageLim()       + "\n");
+                bw.write("hasExtraSeats"    + vehicle.isHasExtraSeats()     + "\n");
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -72,6 +78,13 @@ public class VehicleFileHandler extends FileManager {
                     case  "mileageLim" -> temp.setMileageLim(Double.parseDouble(value));
                     case  "basePrice" -> temp.setBasePrice(Double.parseDouble(value));
                     case  "isRented" -> temp.setIsRented(Boolean.parseBoolean(value));
+                    case "canOffRoad" -> temp.setCanOffRoad(Boolean.parseBoolean(value));
+                    case "towingCap" -> temp.setTowingCap(Double.parseDouble(value));
+                    case "truckBedCap" -> temp.setTruckBedCap(Double.parseDouble(value));
+                    case "torque" -> temp.setTorque(Integer.parseInt(value));
+                    case "storageLim" -> temp.setStorageLim(Integer.parseInt(value));
+                    case "hasExtraSeats" -> temp.setHasExtraSeats(Boolean.parseBoolean(value));
+
                     default -> throw new IllegalStateException("Unexpected value: " + key);
                 }
             }

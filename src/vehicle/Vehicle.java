@@ -128,6 +128,9 @@ public class Vehicle {
     public void setCanOffRoad(boolean canOffRoad) {
         this.canOffRoad = canOffRoad;
     }
+    public boolean getCanOffRoad() {
+        return this.canOffRoad;
+    }
 
     public String getTowingCap() {
         if (this.towingCap == 0)
@@ -169,6 +172,9 @@ public class Vehicle {
 
     public String isHasExtraSeats() {
         return hasExtraSeats ? "✅" : "❌";
+    }
+    public boolean getHasExtraSeats() {
+        return this.hasExtraSeats;
     }
 
     public void setHasExtraSeats(boolean hasExtraSeats) {

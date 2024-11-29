@@ -24,16 +24,18 @@ public class UserFileHandler extends FileManager {
     }
 
     // TODO: Properly handle exceptions
-    static public void save(User user) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(userListFile))){
-            bw.write("userId: "   + user.getName()     + "\n");
-            bw.write("name: "     + user.getName()     + "\n");
-            bw.write("email: "    + user.getEmail()    + "\n");
-            bw.write("password: " + user.getPassword() + "\n");
-            bw.write("userType: " + user.getUserType() + "\n");
+    static public void save(ArrayList<User> userList) {
+        for (User user : userList) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(userListFile))) {
+                bw.write("userId: " + user.getUserId() + "\n");
+                bw.write("name: " + user.getName() + "\n");
+                bw.write("email: " + user.getEmail() + "\n");
+                bw.write("password: " + user.getPassword() + "\n");
+                bw.write("userType: " + user.getUserType() + "\n");
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -47,6 +49,7 @@ public class UserFileHandler extends FileManager {
             while((line = br.readLine()) != null) {
                 if (line.isEmpty()) {
                     userList.add(user);
+                    continue;
                 }
 
                 String[] buffer = line.split(":");
