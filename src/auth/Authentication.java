@@ -64,6 +64,7 @@ public class Authentication {
 
         newUser.setUserId(ThreadLocalRandom.current().nextLong(10000, 99999));
         register(newUser);
+        setAuthenticatedUser(newUser);
     }
 
     public int login(String email, String password) {
