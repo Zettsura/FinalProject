@@ -5,7 +5,7 @@ import java.io.File;
 import java.util.ArrayList;;
 
 class FileManager {
-    private File filePath;
+    static private File filePath;
 
     // TODO: add explicit throw if file operation fails
     public FileManager() {

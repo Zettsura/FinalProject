@@ -2,19 +2,15 @@ package file;
 
 import vehicle.Vehicle;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
+import java.io.*;
 import java.util.ArrayList;
 
 // TODO: add explicit throw if file operation fails
 public class VehicleFileHandler extends FileManager {
-    private File vehicleListFile;
+    private static File vehicleListFile;
     public VehicleFileHandler() {
         super();
-        vehicleListFile = new File(getFilePath() + "/user_list.txt");
+        vehicleListFile = new File(getFilePath() + "/vehicle_list.txt");
         try {
             boolean status;
             if (!vehicleListFile.exists()) {
@@ -25,48 +21,39 @@ public class VehicleFileHandler extends FileManager {
         }
     }
 
-    public void save(Vehicle vehicle) {
-        String test = "tes\nt";
-        try (FileWriter fw = new FileWriter(vehicleListFile, true);){
-            fw.write(
-                "vehicleId: "       + vehicle.vehicleId     + "\n"
-                + "carModel: "      + vehicle.carModel      + "\n"
-                + "modelId: "       + vehicle.modelId       + "\n"
-                + "color: "         + vehicle.color         + "\n"
-                + "fuelType: "      + vehicle.fuelType      + "\n"
-                + "isAutomatic: "   + vehicle.isAutomatic   + "\n"
-                + "passLim: "       + vehicle.passLim       + "\n"
-                + "mileageLim: "    + vehicle.mileageLim    + "\n"
-                + "basePrice: "     + vehicle.basePrice     + "\n"
-                + "isRented: "      + vehicle.isRented      + "\n"
-                + "\n"
-            );
+    // TODO: Properly handle exceptions
+    static public void save(ArrayList<Vehicle> vehicleList) {
+        for (Vehicle vehicle : vehicleList) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(vehicleListFile, true))) {
+                bw.write("vehicleId: "   + vehicle.getVehicleId()   + "\n");
+                bw.write("carModel: "    + vehicle.getCarModel()    + "\n");
+                bw.write("modelId: "     + vehicle.getModelId()     + "\n");
+                bw.write("color: "       + vehicle.getColor()       + "\n");
+                bw.write("fuelType: "    + vehicle.getFuelType()    + "\n");
+                bw.write("isAutomatic: " + vehicle.getIsAutomatic() + "\n");
+                bw.write("passLim: "     + vehicle.getPassLim()     + "\n");
+                bw.write("mileageLim: "  + vehicle.getMileageLim()  + "\n");
+                bw.write("basePrice: "   + vehicle.getBasePrice()   + "\n");
+                bw.write("isRented: "    + vehicle.getIsRented()    + "\n");
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
+    // TODO: Properly handle exceptions
     public ArrayList<Vehicle> load() {
         ArrayList<Vehicle> vehicleList = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(vehicleListFile))){
-            ArrayList<String> stringList = new ArrayList<>();
             String strLine;
-            long vehicleID = 0;
-            String carModel = "";     //brand
-            String modelId = "";
-            String color = "";        // Red, White, Blue, Yellow, Black, Pink, Green
-            String fuelType = "";     // Diesel, Unleaded, High Octane
-            boolean isAutomatic = false;
-            int passLim = 0;
-            double mileageLim = 0;
-            double basePrice = 0;
-            boolean isRented = false;
+            Vehicle temp = new Vehicle();
             while ((strLine = br.readLine()) != null) {
 
                 if (strLine.isEmpty()) {
-                    vehicleList.add(new Vehicle(vehicleID, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim, basePrice, isRented));
+                    vehicleList.add(temp);
+                    temp = new Vehicle();
                     continue;
                 }
 
@@ -75,24 +62,19 @@ public class VehicleFileHandler extends FileManager {
                 String value = buffer[1].trim();
 
                 switch (key) {
-                    case "vehicleId" -> vehicleID = Long.parseLong(value);
-                    case  "carModel" -> carModel = value;
-                    case  "modelId" -> modelId = value;
-                    case  "color" -> color = value;
-                    case  "fuelType" -> fuelType = value;
-                    case  "isAutomatic" -> isAutomatic = Boolean.parseBoolean(value);
-                    case  "passLim" -> passLim = Integer.parseInt(value);
-                    case  "mileageLim" -> mileageLim = Double.parseDouble(value);
-                    case  "basePrice" -> basePrice = Double.parseDouble(value);
-                    case  "isRented" -> isRented = Boolean.parseBoolean(value);
+                    case "vehicleId" -> temp.setVehicleId(Long.parseLong(value));
+                    case  "carModel" -> temp.setCarModel(value);
+                    case  "modelId" -> temp.setModelId(value);
+                    case  "color" -> temp.setColor(value);
+                    case  "fuelType" -> temp.setFuelType(value);
+                    case  "isAutomatic" -> temp.setIsAutomatic(Boolean.parseBoolean(value));
+                    case  "passLim" -> temp.setPassLim(Integer.parseInt(value));
+                    case  "mileageLim" -> temp.setMileageLim(Double.parseDouble(value));
+                    case  "basePrice" -> temp.setBasePrice(Double.parseDouble(value));
+                    case  "isRented" -> temp.setIsRented(Boolean.parseBoolean(value));
                     default -> throw new IllegalStateException("Unexpected value: " + key);
                 }
-
             }
-
-//            for (String string : stringList) {
-//                System.out.println(string);
-//            }
 
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex.getMessage());

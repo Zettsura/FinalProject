@@ -1,22 +1,25 @@
 package vehicle;
 
 public class Vehicle {
-    public long vehicleId;      // Id ng shop
-    public String carModel;     //brand
-    public String modelId;
-    public String color;        // Red, White, Blue, Yellow, Black, Pink, Green
-    public String fuelType;     // Diesel, Unleaded, High Octane
-    public boolean isAutomatic;
-    public int passLim;
-    public double mileageLim;
-    public double basePrice;
-    public boolean isRented;
-    public boolean canOffRoad;
-    public double towingCap;
-    public double truckBedCap;
-    public int torque;
-    public int storageLim;
-    public boolean hasExtraSeats;
+    private long vehicleId;      // Id ng shop
+    private String carModel;     //brand
+    private String modelId;
+    private String color;        // Red, White, Blue, Yellow, Black, Pink, Green
+    private String fuelType;     // Diesel, Unleaded, High Octane
+    private boolean isAutomatic;
+    private int passLim;
+    private double mileageLim;
+    private double basePrice;
+    private boolean isRented;
+    private boolean canOffRoad;
+    private double towingCap;
+    private double truckBedCap;
+    private int torque;
+    private int storageLim;
+    private boolean hasExtraSeats;
+
+    public Vehicle(){
+    };
 
     public Vehicle(long vehicleId, String carModel, String modelId, String color, String fuelType, boolean isAutomatic, int passLim, double mileageLim, double basePrice, boolean isRented, boolean canOffRoad, double towingCap, double truckBedCap, int torque, int storageLim, boolean hasExtraSeats) {
         this.vehicleId = vehicleId;
@@ -36,6 +39,19 @@ public class Vehicle {
         this.torque = torque;
         this.storageLim = storageLim;
         this.hasExtraSeats = hasExtraSeats;
+    }
+
+    public String[] properties() {
+        String[] attributes = new String[] {
+                String.valueOf(vehicleId),
+                carModel,
+                color,
+                fuelType,
+                modelId,
+                String.valueOf(passLim),
+                String.valueOf(mileageLim)
+        };
+        return attributes;
     }
 
     public long getVehicleId() {
@@ -82,7 +98,11 @@ public class Vehicle {
         return canOffRoad ? "Automatic" : "Manual";
     }
 
-    public void setAutomatic(boolean automatic) {
+    public boolean getIsAutomatic() {
+        return isAutomatic;
+    }
+
+    public void setIsAutomatic(boolean automatic) {
         isAutomatic = automatic;
     }
 
@@ -110,11 +130,11 @@ public class Vehicle {
         this.basePrice = basePrice;
     }
 
-    public boolean isRented() {
+    public boolean getIsRented() {
         return isRented;
     }
 
-    public void setRented(boolean rented) {
+    public void setIsRented(boolean rented) {
         isRented = rented;
     }
 
