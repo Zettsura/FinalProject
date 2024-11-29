@@ -37,8 +37,8 @@ public class Menu {
             System.out.println(" CAR RENTAL Log-In");
             System.out.println("+-----------------+");
             System.out.println("| [1] Sign-In     |");
-            System.out.println("| [2] Sign-Up     |");
-            System.out.println("| [3]  Exit       |");
+            System.out.println("| [2] Register    |");
+            System.out.println("| [3] Exit        |");
             System.out.println("+-----------------+");
             System.out.print("ENTER:");
             int opt = inp.nextInt();
