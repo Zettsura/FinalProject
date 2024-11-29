@@ -1,7 +1,10 @@
 package rent;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import auth.Authentication;
 import vehicle.*;
 
 /**
@@ -16,8 +19,17 @@ import vehicle.*;
  */
 
 public class Rent {
-    public ArrayList<Vehicle> vehicleList = new ArrayList<>();
-    public java.time.LocalTime dateRented = java.time.LocalTime.now();
+    private List<Vehicle> vehicleList;
+    private List<Vehicle> rentedVehicleList;
+    private HashMap<Long, Vehicle> vehicleHashMap;
+    private java.time.LocalTime dateRented = java.time.LocalTime.now();
+
+    public Rent() {}
+    public Rent(List<Vehicle> vehicles) {
+        vehicleList = vehicles;
+        rentedVehicleList = vehicles.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
+        vehicleHashMap = new HashMap<>(vehicles.stream().collect(Collectors.toMap(Vehicle::getVehicleId, vehicle -> vehicle)));
+    }
 
     public void mileageLim(float miles){
 
@@ -25,6 +37,14 @@ public class Rent {
 
     public void calcPay(float miles){
 
+    }
+
+    public void rentCar(long vehicleId) {
+        Vehicle vehicle = vehicleHashMap.get(vehicleId);
+        if (vehicle != null) {
+            vehicle.setIsRented(true);
+            Authentication.getAuthenticatedUser().setVehicleId(vehicleId);
+        }
     }
 
     public boolean checkAvailVehicle(Vehicle vehicleList){
