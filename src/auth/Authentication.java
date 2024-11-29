@@ -44,9 +44,9 @@ public class Authentication {
     // TODO: Create prompt
     public void loginPrompt(Scanner sc) throws AuthenticationException {
         sc.nextLine();
-        System.out.println("Email: ");
+        System.out.print("Email: ");
         String email = sc.nextLine();
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         String password = sc.nextLine();
 
         int status = login(email, password);
@@ -60,8 +60,11 @@ public class Authentication {
     public void registerPrompt(Scanner sc) {
         sc.nextLine();
         User newUser = new User();
+        System.out.print("Email: ");
         newUser.setEmail(sc.nextLine());
+        System.out.print("Password: ");
         newUser.setPassword(sc.nextLine());
+        System.out.print("Name: ");
         newUser.setName(sc.nextLine());
 
         newUser.setUserId(ThreadLocalRandom.current().nextLong(10000, 99999));
