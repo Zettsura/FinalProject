@@ -64,7 +64,9 @@ public class Authentication {
     // TODO: Create prompt
     public void loginPrompt(Scanner sc) {
         sc.nextLine();
+        System.out.println("Email: ");
         String email = sc.nextLine();
+        System.out.println("Password: ");
         String password = sc.nextLine();
 
         login(email, password);
