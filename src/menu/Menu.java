@@ -1,6 +1,10 @@
 package menu;
 import vehicle.*;
+import rent.Rent;
+import java.util.List;
 import auth.*;
+
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -19,6 +23,12 @@ import java.util.Scanner;
 
 public class Menu {
     public Scanner inp = new Scanner(System.in);
+    private Rent rentVehicles;
+
+    public Menu(List<Vehicle> vehicles){
+        this.rentVehicles = new Rent(vehicles);
+    }
+
     private String vehicleId = "Vehicle Id", carModel = "Model", color = "Color", fuelType = "Fuel Type", isAutomatic = "Transmission Type", modelId = "Model Id", passLim = "Passenger Limit", mileageLim = "Mileage Limit", canOffRoad = "Off Road Capability";
     protected Vehicle sedan1 = new Vehicle(695783304L , "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0, 500, 300, false);
     protected Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 643.73, 1234.1, false, true, 0, 0, 10, 400, false);
@@ -100,17 +110,19 @@ public class Menu {
 
             switch (opt){
                 case "A": case "a":
-                    displayRentedCars();
+                    displayCars();
                     break;
                 case "B": case "b":
+                    filterCars();
                     break;
                 case "C": case "c":
+                    rentACar();
                     break;
                 case "D": case "d":
                     System.out.println("Are you sure? [Y/N]: ");
                     opt = inp.next();
-                    if(opt == "Y" || opt == "y")
-                        loginMenu();
+                    if(Objects.equals(opt, "Y") || Objects.equals(opt, "y"))
+                        System.exit(0);
                     else if(opt == "N" || opt == "n")
                         continue;
                 default:
@@ -119,14 +131,47 @@ public class Menu {
         }
     }
 
-    public void displayRentedCars(){
-        System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%n", vehicleId, carModel, color, fuelType, isAutomatic, modelId, passLim, mileageLim, canOffRoad);
+    public void displayCars(){
+        int i = 1;
+        System.out.println("Available Cars for Rent: ");
+        List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
 
+        if (availableVehicles.isEmpty()) {
+            System.out.println("There are no available cars to rent at the moment.");
+            return;
+        }
+
+        for (Vehicle v : availableVehicles){
+            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",i ,v.getCarType() ,v.getVehicleId(), v.getCarBrand(), v.getModelId(), v.getColor(), v.getFuelType(), v.getTransmissionType(), v.getPassLim(), v.getMileageLim(), v.isCanOffRoad(), v.getTowingCap(), v.getTruckBedCap(), v.getTorque(), v.getStorageLim(), v.isHasExtraSeats());
+            i++;
+        }
     }
 
     public void rentACar(){
+        Scanner input = new Scanner(System.in);
+        List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
 
+        if (availableVehicles.isEmpty()) {
+            System.out.println("There are no available cars to rent at the moment.");
+            return;
+        }
 
+        displayCars();
+
+        System.out.printf("%nEnter the number of the vehicle that you would like to rent: ");
+        int choice = input.nextInt();
+
+        if((choice-1) >= 0 && choice < availableVehicles.size()){
+            Vehicle vehicleChoice = availableVehicles.get(choice-1);
+            long vehicleId = vehicleChoice.getVehicleId();
+
+            rentVehicles.rentCar(vehicleId);
+
+            rentVehicles.updateRentedVehicleList();
+
+            System.out.println("\nThe vehicle that you rented is");
+            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", vehicleChoice.getCarType() ,vehicleChoice.getVehicleId(), vehicleChoice.getCarBrand(), vehicleChoice.getModelId(), vehicleChoice.getColor(), vehicleChoice.getFuelType(), vehicleChoice.getTransmissionType(), vehicleChoice.getPassLim(), vehicleChoice.getMileageLim(), vehicleChoice.isCanOffRoad(), vehicleChoice.getTowingCap(), vehicleChoice.getTruckBedCap(), vehicleChoice.getTorque(), vehicleChoice.getStorageLim(), vehicleChoice.isHasExtraSeats());
+        }
     }
 
     public void filterCars(){
