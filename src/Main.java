@@ -29,7 +29,7 @@ public class Main {
             System.out.println(vehicle.getCarBrand() + " Color: " + vehicle.getColor());
         }
 
-        User user = new User(12L, "Adrian", "adrian@gmail.com", "1234", "Customer", 12L);
+        User user = new User(12L, "Adrian", "adrian@gmail.com", "1234", 12L);
         auth.register(user);
         auth.login("adrian@gmail.com", "1234");
         System.out.println(Authentication.getAuthenticatedUser().getName());

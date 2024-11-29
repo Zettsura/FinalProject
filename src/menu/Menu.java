@@ -2,7 +2,6 @@ package menu;
 import vehicle.*;
 import auth.*;
 import java.util.Scanner;
-import java.util.Random;
 
 /**
  * TODO
@@ -85,14 +84,14 @@ public class Menu {
         System.out.println("++=================================================================================++");
         System.out.println("++=================================================================================++");
         while(true) {
-            System.out.println("++=================================++");
-            System.out.println("++=================================++");
-            System.out.println("|| [A]  Display All Vehicles       ||");
-            System.out.println("|| [B]  Search                     ||");
-            System.out.println("|| [C]  Rent Car                   ||");
-            System.out.println("|| [D]  Log Out                    ||");
-            System.out.println("++=================================++");
-            System.out.println("++=================================++");
+            System.out.println("++===================================++");
+            System.out.println("++===================================++");
+            System.out.println("|| [A]  Display Available Vehicles   ||");
+            System.out.println("|| [B]  Search                       ||");
+            System.out.println("|| [C]  Rent Car                     ||");
+            System.out.println("|| [D]  Log Out                      ||");
+            System.out.println("++===================================++");
+            System.out.println("++===================================++");
             System.out.println("ENTER: ");
             String opt = inp.next();
 
@@ -112,7 +111,7 @@ public class Menu {
                     else if(opt == "N" || opt == "n")
                         continue;
                 default:
-                    System.out.println("Invalid Option");
+                    System.out.println("ERROR: Invalid Option");
             }
         }
     }
