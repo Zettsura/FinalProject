@@ -1,5 +1,6 @@
 package menu;
 import vehicle.*;
+import auth.*;
 import java.util.Scanner;
 
 /**
@@ -17,16 +18,25 @@ import java.util.Scanner;
  */
 
 public class Menu {
-public class Menu extends Vehicle {
     public Scanner inp = new Scanner(System.in);
+    Vehicle sedan1 = new Vehicle(695783304L , "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0, 500, 300, false);
+    Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 643.73, 1234.1, false, true, 0, 0, 10, 400, false);
+    Vehicle sedan3 = new Vehicle(528692830L, "Sedan", "Pooschie", "Panamera", "Blue", "Diesel", "Manual", 5, 895.152, 5000.1, false, true, 0, 0, 20, 200, true);
+    Vehicle van1 = new Vehicle(229680265L, "Van", "Tonda", "2024-Tonda-ODYSSEY", "Pink", "Unleaded", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    Vehicle van2 = new Vehicle(232352365L, "Van", "Kyundai", "US4", "Green", "Diesel", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    Vehicle van3 = new Vehicle(433252976L, "Van", "Yoyota", "B721", "White", "Premium", "Automatic", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    Vehicle pickUp1 = new Vehicle(242097450L, "Pick-Up Truck", "Tord", "F150", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    Vehicle pickUp2 = new Vehicle(128952996L, "Pick-Up Truck", "Tord", "F160", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    Vehicle pickUp3 = new Vehicle(684529782L, "Pick-Up Truck", "Tord", "G987", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+
     public void loginMenu(){
         while(true) {
-            System.out.println("    CAR RENTAL  ");
-            System.out.println("+---------------+");
-            System.out.println("| [A] Sign-In   |");
-            System.out.println("| [B] Sign-Up   |");
-            System.out.println("| [X]  Exit     |");
-            System.out.println("+---------------+");
+            System.out.println(" CAR RENTAL Log-In");
+            System.out.println("+-----------------+");
+            System.out.println("| [A] Sign-In     |");
+            System.out.println("| [B] Sign-Up     |");
+            System.out.println("| [X]  Exit       |");
+            System.out.println("+-----------------+");
             System.out.print("ENTER:");
             String opt = inp.nextLine();
             switch(opt) {
@@ -69,22 +79,48 @@ public class Menu extends Vehicle {
         System.out.println("++=================================================================================++");
         System.out.println("++=================================================================================++");
         while(true) {
-            System.out.println("++==============================================++");
-            System.out.println("++==============================================++");
-            System.out.println("|| [A]         Display All Vehicles             ||");
-            System.out.println("|| [B]               Search                     ||");
-            System.out.println("|| [C]                                          ||");
-            System.out.println("|| [D]              Log Out                     ||");
-            System.out.println("++==============================================++");
-            System.out.println("++==============================================++");
+            System.out.println("++=================================++");
+            System.out.println("++=================================++");
+            System.out.println("|| [A]  Display All Vehicles       ||");
+            System.out.println("|| [B]  Search                     ||");
+            System.out.println("|| [C]  Rent Car                   ||");
+            System.out.println("|| [D]  Log Out                    ||");
+            System.out.println("++=================================++");
+            System.out.println("++=================================++");
+            System.out.println("ENTER: ");
+            String opt = inp.next();
+
+            switch (opt){
+                case "A": case "a":
+                    displayRentedCars();
+                    break;
+                case "B": case "b":
+                    break;
+                case "C": case "c":
+                    break;
+                case "D": case "d":
+                    System.out.println("Are you sure? [Y/N]: ");
+                    opt = inp.next();
+                    if(opt == "Y" || opt == "y")
+                        loginMenu();
+                    else if(opt == "N" || opt == "n")
+                        continue;
+                default:
+                    System.out.println("Invalid Option");
+            }
         }
     }
 
-    public void displayAll(){
+    public void displayRentedCars(){
 
     }
 
-    public void searchType(){
+    public void rentACar(){
+
+
+    }
+
+    public void filterCars(){
 
 
     }
