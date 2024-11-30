@@ -72,7 +72,6 @@ public class Menu {
                     System.out.println("ERROR: " + ex.getMessage());
                     continue;
                 }
-                break;
             }
         }
 
@@ -137,7 +136,6 @@ public class Menu {
                 default:
                     System.out.println("ERROR: Invalid Option");
             }
-            break;
         }
     }
 
