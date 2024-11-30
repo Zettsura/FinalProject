@@ -89,7 +89,7 @@ public class Authentication {
     };
 
     public void delete(User user) {
-        System.out.println("DELETING: " + user.getName());
         userList.remove(user);
+        UserFileHandler.save(userList);
     }
 }

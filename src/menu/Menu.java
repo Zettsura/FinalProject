@@ -54,11 +54,7 @@ public class Menu {
             int opt = inp.nextInt();
                 try {
                     switch (opt) {
-                        case 1 -> {
-                            auth.loginPrompt(inp);
-                            if (Authentication.getAuthenticatedUser() != null)
-                                menuOptions();
-                        }
+                        case 1 -> auth.loginPrompt(inp);
                         case 2 -> auth.registerPrompt(inp);
                         case 3 -> System.exit(0);
                         default -> throw new RuntimeException("Invalid");

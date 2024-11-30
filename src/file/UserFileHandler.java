@@ -26,7 +26,7 @@ public class UserFileHandler extends FileManager {
     }
 
     static public void save(List<User> userList) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(userListFile, true))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(userListFile))) {
                 for (User user : userList) {
                     bw.write("userId: " + user.getUserId() + "\n");
                     bw.write("name: " + user.getName() + "\n");
