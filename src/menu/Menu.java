@@ -7,20 +7,6 @@ import auth.*;
 import java.util.Objects;
 import java.util.Scanner;
 
-/**
- * TODO
- *  - Only display non-rented cars
- *
- * NOTES:
- *  - Show different menu for authenticated user is currently renting a car
- *    (maybe option to return the vehicle?? )
- *  - Create temporary list of vehicles and filter rented cars
- *  - The menu will receive the temporary copy list of vehicles with filter for rented cars
- *  - Displays the temporary copy list
- *  - Sends the chosen vehicle to rent
- *  - Modify the object on the original
- */
-
 public class Menu {
     public Scanner inp = new Scanner(System.in);
     private Authentication auth;
@@ -54,13 +40,7 @@ public class Menu {
             int opt = inp.nextInt();
                 try {
                     switch (opt) {
-                        case 1 -> {
-                            auth.loginPrompt(inp);
-                            if (Authentication.getAuthenticatedUser() != null) {
-                                System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName());
-                                menuOptions();
-                            }
-                        }
+                        case 1 -> auth.loginPrompt(inp);
                         case 2 -> auth.registerPrompt(inp);
                         case 3 -> System.exit(0);
                         default -> throw new RuntimeException("Invalid");
@@ -72,7 +52,10 @@ public class Menu {
                     System.out.println("ERROR: " + ex.getMessage());
                     continue;
                 }
+                break;
             }
+        assert Authentication.getAuthenticatedUser() != null;
+        System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName());
         }
 
     public void menuOptions(){

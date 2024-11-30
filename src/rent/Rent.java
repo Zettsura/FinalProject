@@ -7,17 +7,6 @@ import java.util.stream.Collectors;
 import auth.Authentication;
 import vehicle.*;
 
-/**
- * TODO:
- *  - Add map of vehicles
- *  - Add temporary copy of list of vehicles
- *  - Filter rented cars on the temporary copy
- *  - Receives the chosen vehicle from Menu
- *  - Set chosen vehicle as rented
- *  - Set the original object on the vehicle list to the modified vehicle object with the use of map
- *  - Save the original list to file;
- */
-
 public class Rent {
     private List<Vehicle> vehicleList;
     private List<Vehicle> availableVehicleList;

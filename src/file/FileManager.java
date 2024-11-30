@@ -5,14 +5,15 @@ import java.io.File;
 class FileManager {
     static private File filePath;
 
-    // TODO: add explicit throw if file operation fails
     public FileManager() {
         try {
             filePath = new File(System.getProperty("user.home") +"/Documents/CarRental/");
-            boolean status;
 
             if (!filePath.exists()) {
-                status = filePath.mkdirs();
+                boolean mkdirs = filePath.mkdirs();
+                if (!mkdirs) {
+                    throw new RuntimeException("Unable to create the directory");
+                }
             }
 
         } catch (NullPointerException ex) {
