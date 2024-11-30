@@ -51,7 +51,7 @@ public class Authentication {
         }
     }
 
-    public void registerPrompt(Scanner sc){
+    public void registerPrompt(Scanner sc) throws AuthenticationException {
         sc.nextLine();
         User newUser = new User();
         System.out.print("Email: ");
@@ -60,6 +60,11 @@ public class Authentication {
         newUser.setPassword(sc.nextLine());
         System.out.print("Name: ");
         newUser.setName(sc.nextLine());
+
+        User user = userHashMap.get(newUser.getEmail());
+        if (user != null) {
+            throw new AuthenticationException("User with that email already exists");
+        }
 
         newUser.setUserId(ThreadLocalRandom.current().nextLong(10000, 99999));
         register(newUser);

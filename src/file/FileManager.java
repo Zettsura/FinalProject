@@ -9,6 +9,7 @@ class FileManager {
         try {
             filePath = new File(System.getProperty("user.home") +"/Documents/CarRental/");
 
+            // Create the directory if it does not exist
             if (!filePath.exists()) {
                 boolean mkdirs = filePath.mkdirs();
                 if (!mkdirs) {
