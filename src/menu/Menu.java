@@ -54,7 +54,13 @@ public class Menu {
             int opt = inp.nextInt();
                 try {
                     switch (opt) {
-                        case 1 -> auth.loginPrompt(inp);
+                        case 1 -> {
+                            auth.loginPrompt(inp);
+                            if (Authentication.getAuthenticatedUser() != null) {
+                                System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName());
+                                menuOptions();
+                            }
+                        }
                         case 2 -> auth.registerPrompt(inp);
                         case 3 -> System.exit(0);
                         default -> throw new RuntimeException("Invalid");
@@ -208,8 +214,48 @@ public class Menu {
         }
     }
 
-    public void filterCars(){
+    public void printType(String type){
+        List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
+        for (Vehicle v : availableVehicles) {
+            if (Objects.equals(v.getCarType(), type)) {
+                System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",
+                        v.getCarType(),
+                        v.getVehicleId(),
+                        v.getCarBrand(),
+                        v.getModelId(),
+                        v.getColor(),
+                        v.getFuelType(),
+                        v.getTransmissionType(),
+                        v.getPassLim(),
+                        v.getMileageLim(),
+                        v.isCanOffRoad(),
+                        v.getTowingCap(),
+                        v.getTruckBedCap(),
+                        v.getTorque(),
+                        v.getStorageLim(),
+                        v.isHasExtraSeats());
+            }
+        }
+    }
 
+    public void filterCars(){
+        List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
+        System.out.println("Which type of car would you like to see:\n\t[1] Sedan\n\t[2] Van\n\t[3] Pick-up Truck" );
+        Scanner input = new Scanner(System.in);
+
+        int choice = input.nextInt();
+
+        switch (choice){
+            case 1:
+                printType("Sedan");
+                break;
+            case 2:
+                printType("Van");
+                break;
+            case 3:
+                printType("Pick-up Truck");
+                break;
+        }
 
     }
 }
