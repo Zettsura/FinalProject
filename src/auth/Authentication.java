@@ -49,10 +49,12 @@ public class Authentication {
         if (status == -1) {
             throw new AuthenticationException("Wrong username or password!");
         }
+        else
+            System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName());
 
     }
 
-    public void registerPrompt(Scanner sc) {
+    public void registerPrompt(Scanner sc){
         sc.nextLine();
         User newUser = new User();
         System.out.print("Email: ");
@@ -78,6 +80,7 @@ public class Authentication {
 
         if (user.getPassword().equals(password)) {
             setAuthenticatedUser(user);
+            status = 1;
         }
         return status;
     }

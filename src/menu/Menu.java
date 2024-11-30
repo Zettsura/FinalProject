@@ -53,10 +53,14 @@ public class Menu {
             int opt = inp.nextInt();
                 try {
                     switch (opt) {
-                        case 1 -> auth.loginPrompt(inp);
+                        case 1 -> {
+                            auth.loginPrompt(inp);
+                            if (Authentication.getAuthenticatedUser() != null)
+                                menuOptions();
+                        }
                         case 2 -> auth.registerPrompt(inp);
                         case 3 -> System.exit(0);
-                        default -> throw new RuntimeException();
+                        default -> throw new RuntimeException("Invalid");
                     }
                 } catch (AuthenticationException ex) {
                     System.out.println("ERROR: " + ex.getMessage());
@@ -142,7 +146,22 @@ public class Menu {
         }
 
         for (Vehicle v : availableVehicles){
-            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",i ,v.getCarType() ,v.getVehicleId(), v.getCarBrand(), v.getModelId(), v.getColor(), v.getFuelType(), v.getTransmissionType(), v.getPassLim(), v.getMileageLim(), v.isCanOffRoad(), v.getTowingCap(), v.getTruckBedCap(), v.getTorque(), v.getStorageLim(), v.isHasExtraSeats());
+            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",i ,
+                    v.getCarType(),
+                    v.getVehicleId(),
+                    v.getCarBrand(),
+                    v.getModelId(),
+                    v.getColor(),
+                    v.getFuelType(),
+                    v.getTransmissionType(),
+                    v.getPassLim(),
+                    v.getMileageLim(),
+                    v.isCanOffRoad(),
+                    v.getTowingCap(),
+                    v.getTruckBedCap(),
+                    v.getTorque(),
+                    v.getStorageLim(),
+                    v.isHasExtraSeats());
             i++;
         }
     }
@@ -170,7 +189,22 @@ public class Menu {
             rentVehicles.updateRentedVehicleList();
 
             System.out.println("\nThe vehicle that you rented is");
-            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n", vehicleChoice.getCarType() ,vehicleChoice.getVehicleId(), vehicleChoice.getCarBrand(), vehicleChoice.getModelId(), vehicleChoice.getColor(), vehicleChoice.getFuelType(), vehicleChoice.getTransmissionType(), vehicleChoice.getPassLim(), vehicleChoice.getMileageLim(), vehicleChoice.isCanOffRoad(), vehicleChoice.getTowingCap(), vehicleChoice.getTruckBedCap(), vehicleChoice.getTorque(), vehicleChoice.getStorageLim(), vehicleChoice.isHasExtraSeats());
+            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",
+                    vehicleChoice.getCarType(),
+                    vehicleChoice.getVehicleId(),
+                    vehicleChoice.getCarBrand(),
+                    vehicleChoice.getModelId(),
+                    vehicleChoice.getColor(),
+                    vehicleChoice.getFuelType(),
+                    vehicleChoice.getTransmissionType(),
+                    vehicleChoice.getPassLim(),
+                    vehicleChoice.getMileageLim(),
+                    vehicleChoice.isCanOffRoad(),
+                    vehicleChoice.getTowingCap(),
+                    vehicleChoice.getTruckBedCap(),
+                    vehicleChoice.getTorque(),
+                    vehicleChoice.getStorageLim(),
+                    vehicleChoice.isHasExtraSeats());
         }
     }
 

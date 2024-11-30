@@ -28,8 +28,8 @@ public class Main {
         }
 
         Menu menu = new Menu(vehicles);
+
         menu.loginMenu();
-        menu.menuOptions();
 
 //        User user = new User(12L, "Adrian", "adrian@gmail.com", "1234", 12L);
 //        auth.register(user);
