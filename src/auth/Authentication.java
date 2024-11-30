@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Authentication {
-    static private User authenticatedUser;
+    private static User authenticatedUser;
     private final List<User> userList;
     private HashMap<String, User> userHashMap;
 
@@ -49,9 +49,6 @@ public class Authentication {
         if (status == -1) {
             throw new AuthenticationException("Wrong username or password!");
         }
-        else
-            System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName());
-
     }
 
     public void registerPrompt(Scanner sc){
@@ -69,7 +66,7 @@ public class Authentication {
         setAuthenticatedUser(newUser);
     }
 
-    public int login(String email, String password) {
+    private int login(String email, String password) {
         int status = -1;
         email = email.trim();
         password = password.trim();
@@ -85,9 +82,14 @@ public class Authentication {
         return status;
     }
 
-    public void register(User user) {
+    private void register(User user) {
         userList.add(user);
         userHashMap.put(user.getEmail(), user);
         UserFileHandler.save(userList);
     };
+
+    public void delete(User user) {
+        System.out.println("DELETING: " + user.getName());
+        userList.remove(user);
+    }
 }

@@ -23,10 +23,12 @@ import java.util.Scanner;
 
 public class Menu {
     public Scanner inp = new Scanner(System.in);
+    private Authentication auth;
     private Rent rentVehicles;
 
-    public Menu(List<Vehicle> vehicles){
+    public Menu(List<Vehicle> vehicles, Authentication auth){
         this.rentVehicles = new Rent(vehicles);
+        this.auth = auth;
     }
 
     private String vehicleId = "Vehicle Id", carModel = "Model", color = "Color", fuelType = "Fuel Type", isAutomatic = "Transmission Type", modelId = "Model Id", passLim = "Passenger Limit", mileageLim = "Mileage Limit", canOffRoad = "Off Road Capability";
@@ -42,7 +44,6 @@ public class Menu {
 
     public void loginMenu(){
         while(true) {
-            Authentication auth = new Authentication();
             System.out.println(" CAR RENTAL Log-In");
             System.out.println("+-----------------+");
             System.out.println("| [1] Sign-In     |");
@@ -72,7 +73,6 @@ public class Menu {
                 break;
             }
         }
-
 
     public void menuOptions(){
         System.out.println("++=================================================================================++");
@@ -129,9 +129,13 @@ public class Menu {
                         System.exit(0);
                     else if(opt == "N" || opt == "n")
                         continue;
+                case "E": case "e":
+                    auth.delete(Authentication.getAuthenticatedUser());
+                    break;
                 default:
                     System.out.println("ERROR: Invalid Option");
             }
+            break;
         }
     }
 
