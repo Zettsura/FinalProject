@@ -12,6 +12,14 @@ public class Main {
         List<Vehicle> vehicleList = vfh.load();
 
         Menu menu = new Menu(vehicleList, auth);
+
+        if (vehicleList.isEmpty()) {
+            menu.initializeVehicles(vehicleList);
+            VehicleFileHandler.save(vehicleList);
+        }
+
+        VehicleFileHandler.save(vehicleList);
+
         menu.loginMenu();
         menu.menuOptions();
     }

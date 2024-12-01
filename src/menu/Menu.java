@@ -1,4 +1,5 @@
 package menu;
+import file.VehicleFileHandler;
 import vehicle.*;
 import rent.Rent;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 public class Menu {
     public Scanner inp = new Scanner(System.in);
     private Authentication auth;
-    private Rent rentVehicles;
+    public Rent rentVehicles;
 
     public Menu(List<Vehicle> vehicles, Authentication auth){
         this.rentVehicles = new Rent(vehicles);
@@ -27,6 +28,22 @@ public class Menu {
     protected Vehicle pickUp1 = new Vehicle(242097450L, "Pick-Up Truck", "Tord", "F150", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
     protected Vehicle pickUp2 = new Vehicle(128952996L, "Pick-Up Truck", "Tord", "F160", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
     protected Vehicle pickUp3 = new Vehicle(684529782L, "Pick-Up Truck", "Tord", "G987", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+
+    public void initializeVehicles(List<Vehicle> vehicles){
+        if (vehicles.isEmpty()){
+            vehicles.add(sedan1);
+            vehicles.add(sedan2);
+            vehicles.add(sedan3);
+            vehicles.add(van1);
+            vehicles.add(van2);
+            vehicles.add(van3);
+            vehicles.add(pickUp1);
+            vehicles.add(pickUp2);
+            vehicles.add(pickUp3);
+
+            VehicleFileHandler.save(vehicles);
+        }
+    }
 
     public void loginMenu(){
         while(true) {
@@ -181,6 +198,8 @@ public class Menu {
             rentVehicles.rentCar(vehicleId);
 
             rentVehicles.updateRentedVehicleList();
+
+            VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
 
             System.out.println("\nThe vehicle that you rented is");
             System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",
