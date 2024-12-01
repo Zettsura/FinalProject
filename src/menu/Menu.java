@@ -157,7 +157,7 @@ public class Menu {
         }
 
         for (Vehicle v : availableVehicles){
-            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",i ,
+            System.out.format("%-15s%-10s%-10s%-15s%-25s%-15s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",i ,
                     v.getCarType(),
                     v.getVehicleId(),
                     v.getCarBrand(),
