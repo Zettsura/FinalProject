@@ -178,6 +178,9 @@ public class Menu {
                     v.isHasExtraSeats() ? "Yes" : "No");
             i++;
         }
+        System.out.print("========================================================================");
+        System.out.print("========================================================================");
+        System.out.println("========================================================================");
     }
 
     public void rentACar(){
@@ -228,6 +231,9 @@ public class Menu {
         } catch (RuntimeException ex){
             System.out.println("ERROR: " + ex.getMessage());
         }
+        System.out.print("========================================================================");
+        System.out.print("========================================================================");
+        System.out.println("========================================================================");
     }
 
     public void printType(String type){
@@ -285,6 +291,9 @@ public class Menu {
             } catch (RuntimeException ex){
                 System.out.println("ERROR: " + ex.getMessage());
             }
+            System.out.print("========================================================================");
+            System.out.print("========================================================================");
+            System.out.println("========================================================================");
     }
 
     public void printColumn(){
