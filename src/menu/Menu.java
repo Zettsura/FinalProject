@@ -121,14 +121,14 @@ public class Menu {
                     rentACar();
                     break;
                 case "D": case "d":
-                    System.out.println("Are you sure? [Y/N]: ");
+                    System.out.print("Are you sure? [Y/N]: ");
                     opt = inp.next();
                     if(Objects.equals(opt, "Y") || Objects.equals(opt, "y"))
                         loginMenu();
                     else if(Objects.equals(opt, "N") || Objects.equals(opt, "n"))
                         continue;
                 case "E": case "e":
-                    System.out.println("Are you sure? [Y/N]: ");
+                    System.out.print("Are you sure!? [Y/N]: ");
                     opt = inp.next();
                     if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
                         auth.delete(Authentication.getAuthenticatedUser());
@@ -149,7 +149,9 @@ public class Menu {
 
     public void displayCars(){
         int i = 1;
-        System.out.println("Available Cars for Rent: ");
+        System.out.println("=======================================");
+        System.out.println("       Available Cars for Rent ");
+        System.out.println("=======================================");
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
 
         if (availableVehicles.isEmpty()) {
@@ -183,13 +185,16 @@ public class Menu {
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
 
         if (availableVehicles.isEmpty()) {
-            System.out.println("There are no available cars to rent at the moment.");
+            System.out.println("===================================================");
+            System.out.println(" There are no available cars to rent at the moment.");
+            System.out.println("====================================================");
             return;
         }
 
         displayCars();
         try {
-            System.out.printf("%nEnter the number of the vehicle that you would like to rent: ");
+            System.out.println("==============================================================\n");
+            System.out.printf(" Enter the number of the vehicle that you would like to rent: ");
             int choice = input.nextInt();
 
             if ((choice - 1) >= 0 && choice < availableVehicles.size()) {
@@ -217,7 +222,7 @@ public class Menu {
                         vehicleChoice.getTorque(),
                         vehicleChoice.getStorageLim(),
                         vehicleChoice.isHasExtraSeats());
-            }
+            }else {throw new RuntimeException("Invalid");}
         }catch (InputMismatchException ex){
             System.out.println("ERROR: " + ex.getMessage());
         } catch (RuntimeException ex){
@@ -252,7 +257,10 @@ public class Menu {
     
     public void filterCars(){
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
+            System.out.println("========================================");
             System.out.println("Which type of car would you like to see:\n\t[1] Sedan\n\t[2] Van\n\t[3] Pick-up Truck");
+            System.out.println("========================================");
+            System.out.print("Enter: ");
             Scanner input = new Scanner(System.in);
             try {
                 int choice = input.nextInt();
@@ -267,7 +275,7 @@ public class Menu {
                         break;
                     case 3:
                         printType("Pick-Up");
-                        System.out.println("");
+                        System.out.println();
                         break;
                     default:
                         throw new RuntimeException("Invalid");
