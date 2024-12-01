@@ -19,15 +19,15 @@ public class Menu {
     }
 
     private String vehicleId = "Vehicle Id", carModel = "Model", color = "Color", fuelType = "Fuel Type", isAutomatic = "Transmission Type", modelId = "Model Id", passLim = "Passenger Limit", mileageLim = "Mileage Limit", canOffRoad = "Off Road Capability";
-    protected Vehicle sedan1 = new Vehicle(695783304L , "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 523.42, 2000.1, true, false, 200.1, 0, 500, 300, false);
-    protected Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 643.73, 1234.1, false, true, 0, 0, 10, 400, false);
-    protected Vehicle sedan3 = new Vehicle(528692830L, "Sedan", "Pooschie", "Panamera", "Blue", "Diesel", "Manual", 5, 895.152, 5000.1, false, true, 0, 0, 20, 200, true);
-    protected Vehicle van1 = new Vehicle(229680265L, "Van", "Tonda", "2024-Tonda-ODYSSEY", "Pink", "Unleaded", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    protected Vehicle van2 = new Vehicle(232352365L, "Van", "Kyundai", "US4", "Green", "Diesel", "Manual", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    protected Vehicle van3 = new Vehicle(433252976L, "Van", "Yoyota", "B721", "White", "Premium", "Automatic", 8, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    protected Vehicle pickUp1 = new Vehicle(242097450L, "Pick-Up Truck", "Tord", "F150", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    protected Vehicle pickUp2 = new Vehicle(128952996L, "Pick-Up Truck", "Tord", "F160", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
-    protected Vehicle pickUp3 = new Vehicle(684529782L, "Pick-Up Truck", "Tord", "G987", "Gray", "Unleaded", "Manual", 2, 1237.23, 2500.69, false, true, 0, 0, 20, 200, true);
+    protected Vehicle sedan1 = new Vehicle(695783304L , "Sedan", "Suzuki", "1.3-CLE-CVT", "Red", "Diesel", "Manual", 5, 50.0, 1500.1, false, false, 200, 0, 500, 300, false);
+    protected Vehicle sedan2 = new Vehicle(102423415L, "Sedan", "Tonda", "2025-Tivic-Sport-Sedan", "Black", "Unleaded", "Automatic", 5, 50.0, 2400.1, false, true, 700, 0, 750, 200, false);
+    protected Vehicle sedan3 = new Vehicle(528692830L, "Sedan", "Pooschie", "Panamera", "Blue", "Diesel", "Manual", 5, 50.0, 2000.1, false, false, 500, 0, 450, 150, false);
+    protected Vehicle van1 = new Vehicle(229680265L, "Van", "Tonda", "2024-Tonda-ODYSSEY", "Pink", "Unleaded", "Manual", 8, 50.0, 6500.69, false, true, 3700, 0, 1700, 350, true);
+    protected Vehicle van2 = new Vehicle(232352365L, "Van", "Kyundai", "US4", "Green", "Diesel", "Manual", 8, 50.0, 4500.69, false, false, 3200, 0, 1500, 400, true);
+    protected Vehicle van3 = new Vehicle(433252976L, "Van", "Yoyota", "B721", "White", "Premium", "Automatic", 8, 50.0, 5000.69, false, false, 3500, 0, 1450, 400, true);
+    protected Vehicle pickUp1 = new Vehicle(242097450L, "Pick-Up", "Tord", "F150", "Gray", "Unleaded", "Manual", 2, 50.0, 10000.69, false, true, 7000, 100, 2300, 600, false);
+    protected Vehicle pickUp2 = new Vehicle(128952996L, "Pick-Up", "Kia", "F160", "Black", "Unleaded", "Manual", 2, 50.0, 11000.69, false, true, 6800, 300, 2400, 800, false);
+    protected Vehicle pickUp3 = new Vehicle(684529782L, "Pick-Up", "Toyota", "G987", "White", "Premium", "Manual", 2, 50.0, 12500.69, false, true, 7500, 500, 2500, 1000, false);
 
     public void initializeVehicles(List<Vehicle> vehicles){
         if (vehicles.isEmpty()){
@@ -167,13 +167,13 @@ public class Menu {
                     v.getFuelType(),
                     v.getTransmissionType(),
                     v.getPassLim(),
-                    v.getMileageLim(),
-                    v.isCanOffRoad(),
-                    v.getTowingCap(),
-                    v.getTruckBedCap(),
-                    v.getTorque(),
-                    v.getStorageLim(),
-                    v.isHasExtraSeats());
+                    v.getMileageLim() + " mi",
+                    v.isCanOffRoad() ? "Capable" : "Incapable",
+                    v.getTowingCap() + " kg",
+                    v.getTruckBedCap() + " kg",
+                    v.getTorque() + " Nm",
+                    v.getStorageLim() + " kg",
+                    v.isHasExtraSeats() ? "Yes" : "No");
             i++;
         }
     }
@@ -246,8 +246,7 @@ public class Menu {
             }
         }
     }
-
-
+    
     public void filterCars(){
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
             System.out.println("Which type of car would you like to see:\n\t[1] Sedan\n\t[2] Van\n\t[3] Pick-up Truck");
@@ -264,7 +263,7 @@ public class Menu {
                         System.out.println();
                         break;
                     case 3:
-                        printType("Pick-up Truck");
+                        printType("Pick-Up");
                         System.out.println("");
                         break;
                     default:
@@ -296,7 +295,7 @@ public class Menu {
                 CanOffRoad = "Capability",
                 TowingCap2 = "Towing",
                 TowingCap = "Capacity",
-                TruckBedCap2 = "Bed",
+                TruckBedCap2 = "Truck Bed",
                 TruckBedCap = "Capacity",
                 Torque = "Torque",
                 StorageLim2 = "Storage ",

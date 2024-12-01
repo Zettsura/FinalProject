@@ -125,8 +125,8 @@ public class Vehicle {
         isRented = rented;
     }
 
-    public String isCanOffRoad() {
-        return canOffRoad ? "Capable" : "Incapable";
+    public boolean isCanOffRoad() {
+        return canOffRoad;
     }
 
     public void setCanOffRoad(boolean canOffRoad) {
@@ -168,8 +168,8 @@ public class Vehicle {
         this.storageLim = storageLim;
     }
 
-    public String isHasExtraSeats() {
-        return hasExtraSeats ? "✅" : "❌";
+    public boolean isHasExtraSeats() {
+        return hasExtraSeats;
     }
     public boolean getHasExtraSeats() {
         return this.hasExtraSeats;
