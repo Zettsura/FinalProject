@@ -1,5 +1,6 @@
 package menu;
 import file.VehicleFileHandler;
+import file.UserFileHandler;
 import vehicle.*;
 import rent.Rent;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Menu {
     public Scanner inp = new Scanner(System.in);
     private Authentication auth;
     public Rent rentVehicles;
+    public User user;
 
     public Menu(List<Vehicle> vehicles, Authentication auth){
         this.rentVehicles = new Rent(vehicles);
@@ -57,7 +59,11 @@ public class Menu {
                 try {
                     int opt = inp.nextInt();
                     switch (opt) {
-                        case 1 -> auth.loginPrompt(inp);
+                        case 1 -> {
+                            auth.loginPrompt(inp);
+                            this.user = Authentication.getAuthenticatedUser();
+                            menuOptions();
+                        }
                         case 2 -> auth.registerPrompt(inp);
                         case 3 -> System.exit(0);
                         default -> throw new RuntimeException("Invalid");
@@ -185,7 +191,13 @@ public class Menu {
 
     public void rentACar(){
         Scanner input = new Scanner(System.in);
+        UserFileHandler userFileHandler = new UserFileHandler();
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
+
+        if(user.getVehicleId() != 0){
+            System.out.println("You can only rent one vehicle at a time");
+            return;
+        }
 
         if (availableVehicles.isEmpty()) {
             System.out.println("===================================================");
@@ -200,37 +212,49 @@ public class Menu {
             System.out.printf(" Enter the number of the vehicle that you would like to rent: ");
             int choice = input.nextInt();
 
-            if ((choice - 1) >= 0 && choice < availableVehicles.size()) {
-                Vehicle vehicleChoice = availableVehicles.get(choice - 1);
-                long vehicleId = vehicleChoice.getVehicleId();
+        if(choice >= 1 && choice <= availableVehicles.size()){
+            Vehicle vehicleChoice = availableVehicles.get(choice-1);
+            long vehicleId = vehicleChoice.getVehicleId();
 
-                rentVehicles.rentCar(vehicleId);
+            rentVehicles.rentCar(vehicleId);
+            rentVehicles.updateRentedVehicleList();
+            user.setVehicleId(vehicleId);
+            VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
 
-                rentVehicles.updateRentedVehicleList();
+            List<User> userList = userFileHandler.load();
 
-                VehicleFileHandler.save(rentVehicles.getRentedVehicleList());System.out.println("\nThe vehicle that you rented is");
-                System.out.format("%-5s%-10s%-20s%-15s%-25s%-15s%-15s%-15s%-10s%-15s%-15s%-10s%-10s%-10s%-10s%n",
-                        vehicleChoice.getCarType(),
-                        vehicleChoice.getVehicleId(),
-                        vehicleChoice.getCarBrand(),
-                        vehicleChoice.getModelId(),
-                        vehicleChoice.getColor(),
-                        vehicleChoice.getFuelType(),
-                        vehicleChoice.getTransmissionType(),
-                        vehicleChoice.getPassLim(),
-                        vehicleChoice.getMileageLim(),
-                        vehicleChoice.isCanOffRoad(),
-                        vehicleChoice.getTowingCap(),
-                        vehicleChoice.getTruckBedCap(),
-                        vehicleChoice.getTorque(),
-                        vehicleChoice.getStorageLim(),
-                        vehicleChoice.isHasExtraSeats());
-            }else {throw new RuntimeException("Invalid");}
+            for (User u : userList){
+                if (u.getUserId() == user.getUserId()){
+                    u.setVehicleId(vehicleId);
+                    break;
+                }
+            }
+            UserFileHandler.save(userList);
+
+            System.out.println("\nThe vehicle that you rented is");
+            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",
+                    vehicleChoice.getCarType(),
+                    vehicleChoice.getVehicleId(),
+                    vehicleChoice.getCarBrand(),
+                    vehicleChoice.getModelId(),
+                    vehicleChoice.getColor(),
+                    vehicleChoice.getFuelType(),
+                    vehicleChoice.getTransmissionType(),
+                    vehicleChoice.getPassLim(),
+                    vehicleChoice.getMileageLim(),
+                    vehicleChoice.isCanOffRoad(),
+                    vehicleChoice.getTowingCap(),
+                    vehicleChoice.getTruckBedCap(),
+                    vehicleChoice.getTorque(),
+                    vehicleChoice.getStorageLim(),
+                    vehicleChoice.isHasExtraSeats());
+        }else {throw new RuntimeException("Invalid");}
         }catch (InputMismatchException ex){
             System.out.println("ERROR: " + ex.getMessage());
         } catch (RuntimeException ex){
             System.out.println("ERROR: " + ex.getMessage());
         }
+
         System.out.print("========================================================================");
         System.out.print("========================================================================");
         System.out.println("========================================================================");
@@ -260,7 +284,7 @@ public class Menu {
             }
         }
     }
-    
+
     public void filterCars(){
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
             System.out.println("========================================");

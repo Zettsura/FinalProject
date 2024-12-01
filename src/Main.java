@@ -19,6 +19,5 @@ public class Main {
         VehicleFileHandler.save(vehicleList);
 
         menu.loginMenu();
-        menu.menuOptions();
     }
 }
