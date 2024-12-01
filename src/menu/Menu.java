@@ -62,31 +62,28 @@ public class Menu {
 
 
     public void menuOptions(){
-        System.out.println("++=================================================================================++");
-        System.out.println("++=================================================================================++");
-        System.out.println("||   //                                                                            ||");
-        System.out.println("||  //                 CCCCCCCCC          AA          RRRRRRRRRR                   ||");
-        System.out.println("|| //                 CCCCCCCCCC         AAAA         RRRRRRRRRRR                  ||");
-        System.out.println("||//                 CCCC               AA  AA        RRR       RR                 ||");
-        System.out.println("||/                  CCC               AA    AA       RRR       RR                 ||");
-        System.out.println("||                   CCC              AAAAAAAAAA      RRRRRRRRRRR                  ||");
-        System.out.println("||                   CCC             AAAAAAAAAAAA     RRRRRRRRRR                   ||");
-        System.out.println("||                   CCCC           AAAA      AAAA    RRR    RRRR                  ||");
-        System.out.println("||                    CCCCCCCCCC   AAAA        AAAA   RRR      RRRR                ||");
-        System.out.println("||                      CCCCCCCC  AAAA          AAAA  RRR      RRRR                ||");
-        System.out.println("||                                                                                 ||");
-        System.out.println("||            RRRRRRRRRR     EEEEEEEEEE  NNNNN       NNN  TTTTTTTTTTTTTT           ||");
-        System.out.println("||            RRRRRRRRRRR    EEEEEEEEEE  NNNNNN      NNN  TTTTTTTTTTTTTT           ||");
-        System.out.println("||            RRR       RR   EEE         NNNNNNN     NNN       TTTT                ||");
-        System.out.println("||            RRR       RR   EEE         NNN  NNN    NNN       TTTT                ||");
-        System.out.println("||            RRRRRRRRRRR    EEEEEEEE    NNN   NNN   NNN       TTTT                ||");
-        System.out.println("||            RRRRRRRRRR     EEEEEEEE    NNN    NNNN NNN       TTTT                ||");
-        System.out.println("||            RRR    RRRR    EEE         NNN     NNNNNNN       TTTT                ||");
-        System.out.println("||            RRR      RRRR  EEEEEEEEEE  NNN       NNNNN       TTTT                ||");
-        System.out.println("||            RRR      RRRR  EEEEEEEEEE  NNN        NNNN       TTTT                ||");
-        System.out.println("||                                                                                 ||");
-        System.out.println("++=================================================================================++");
-        System.out.println("++=================================================================================++");
+        System.out.println("++====================================================++");
+        System.out.println("++====================================================++");
+        System.out.println("||   __                                               ||");
+        System.out.println("|| __  ---________CCCCCC      AAA      RRRRRRR        ||");
+        System.out.println("||   --_________CCC         AA AA     RR    RR        ||");
+        System.out.println("||   _________CCC         AA   AA    RR    RR         ||");
+        System.out.println("|| __________CCC        AAAAAAAAA   RRRRRRR           ||");
+        System.out.println("||___________CCC      AA       AA  RR    RR           ||");
+        System.out.println("|| __________CCCCCC AA         AA RR     RR           ||");
+        System.out.println("||                                                    ||");
+        System.out.println("||        RRRRRRR   EEEEEEE  NNN    NN TTTTTTTTTT     ||");
+        System.out.println("||       RR    RR  EE       NNNN   NN    TTTT         ||");
+        System.out.println("||      RR    RR  EEEEEEE  NN NN  NN    TTTT          ||");
+        System.out.println("||     RRRRRRR   EE       NN  NN NN    TTTT           ||");
+        System.out.println("||    RR    RR  EE       NN   NNNN    TTTT            ||");
+        System.out.println("||   RR     RR EEEEEEE  NN    NNN    TTTT             ||");
+        System.out.println("||                                                    ||");
+        System.out.println("++====================================================++");
+        System.out.println("++====================================================++");
+
+
+
         while(true) {
             System.out.println("++===================================++");
             System.out.println("++===================================++");
@@ -123,9 +120,11 @@ public class Menu {
                     auth.delete(Authentication.getAuthenticatedUser());
                     break;
                 default:
-                    System.out.println("ERROR: Invalid Option");
+                    throw new RuntimeException("Invalid");
                 }
             }catch(InputMismatchException ex){
+                System.out.println("ERROR: " + ex.getMessage());
+            }catch (RuntimeException ex){
                 System.out.println("ERROR: " + ex.getMessage());
             }
         }
@@ -251,4 +250,3 @@ public class Menu {
 }
 
 
-//System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%n", sedan1.getVehicleId(), sedan1.getCarBrand(), sedan1.getColor(), sedan1.getFuelType(), sedan1.isAutomatic(), sedan1.getModelId(), sedan1.getPassLim(), sedan1.getMileageLim(), sedan1.isCanOffRoad());
