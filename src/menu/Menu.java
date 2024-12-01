@@ -13,6 +13,7 @@ public class Menu {
     public Scanner inp = new Scanner(System.in);
     private Authentication auth;
     public Rent rentVehicles;
+    public String opt;
     public User user;
 
     public Menu(List<Vehicle> vehicles, Authentication auth){
@@ -56,36 +57,32 @@ public class Menu {
             System.out.println("| [3] Exit        |");
             System.out.println("+-----------------+");
             System.out.print("ENTER: ");
-                try {
-                    int opt = inp.nextInt();
-                    switch (opt) {
-                        case 1 -> {
-                            auth.loginPrompt(inp);
-                            this.user = Authentication.getAuthenticatedUser();
-                            menuOptions();
-                        }
-                        case 2 -> auth.registerPrompt(inp);
-                        case 3 -> System.exit(0);
-                        default -> throw new RuntimeException("Invalid");
-                    }
-                } catch (AuthenticationException ex) {
-                    System.out.println("ERROR: " + ex.getMessage());
-                    continue;
-                } catch (InputMismatchException ex){
-                    inp.nextLine();
-                    System.out.println("ERROR: " + ex.getMessage());
-                    continue;
-                } catch (RuntimeException ex) {
-                    System.out.println("ERROR: " + ex.getMessage());
-                    continue;
+            try {
+                int opt = inp.nextInt();
+                switch (opt) {
+                    case 1:
+                        auth.loginPrompt(inp);
+                        menuOptions();
+                    case 2:
+                        auth.registerPrompt(inp);
+                        continue;
+                    case 3: System.exit(0);
+                    default: throw new RuntimeException("Invalid");
                 }
-                break;
+            } catch (AuthenticationException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            } catch (InputMismatchException ex){
+                inp.nextLine();
+                System.out.println("ERROR: " + ex.getMessage());
+            } catch (RuntimeException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
             }
         }
+    }
 
 
     public void menuOptions(){
-        try{
+        boolean run = true;
         System.out.println("++====================================================++");
         System.out.println("++====================================================++");
         System.out.println("||   __                                               ||");
@@ -106,64 +103,65 @@ public class Menu {
         System.out.println("++====================================================++");
         System.out.println("++====================================================++");
         do {
-        System.out.println();
-        System.out.println("       ++===================================++");
-        System.out.println("       || [A]  Display Available Vehicles   ||");
-        System.out.println("       || [B]  Search                       ||");
-        System.out.println("       || [C]  Rent Car                     ||");
-        System.out.println("       || [D]  Log Out                      ||");
-        System.out.println("       || [E]  Delete Account               ||");
-        System.out.println("       ++===================================++");
-        System.out.print("               ENTER: ");
-            Scanner menuInp = new Scanner(System.in);
-            String opt ;
-            opt = menuInp.next();
-            switch (opt) {
-                case "A": case "a":
-                    displayCars();
-                    break;
-                case "B": case "b":
-                    filterCars();
-                    break;
-                case "C": case "c":
-                    rentACar();
-                    break;
-                case "D": case "d":
-                    System.out.println("===================================");
-                    System.out.print(" Are you sure? [Y/N]: ");
-                    opt = inp.next();
-                    if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")){
-                        System.out.println("===================================\n");
-                        loginMenu();
-                    }
-                    else if(Objects.equals(opt, "N") || Objects.equals(opt, "n")){
-                        System.out.println("===================================\n");
-                        continue;
-                    }
-                    break;
-                case "E": case "e":
-                    System.out.println("===================================");
-                    System.out.print("Are you sure!? [Y/N]: ");
-                    opt = inp.next();
-                    if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
-                        auth.delete(Authentication.getAuthenticatedUser());
-                        System.out.println("===================================\n");
-                        loginMenu();
-                    }else if(Objects.equals(opt, "N") || Objects.equals(opt, "n")) {
-                        System.out.println("===================================\n");
-                        continue;
-                    }
-                    break;
-                default:
-                    throw new RuntimeException("Invalid");
+            System.out.println("       ++===================================++");
+            System.out.println("       || [A]  Display Available Vehicles   ||");
+            System.out.println("       || [B]  Search                       ||");
+            System.out.println("       || [C]  Rent Car                     ||");
+            System.out.println("       || [D]  Log Out                      ||");
+            System.out.println("       || [E]  Delete Account               ||");
+            System.out.println("       ++===================================++");
+            System.out.print("               ENTER: ");
+            try{
+                opt = inp.next();
+                switch (opt) {
+                    case "A": case "a":
+                        displayCars();
+                        System.out.println();
+                        break;
+                    case "B": case "b":
+                        filterCars();
+                        System.out.println();
+                        break;
+                    case "C": case "c":
+                        rentACar();
+                        System.out.println();
+                        break;
+                    case "D": case "d":
+                        System.out.println("=======================================");
+                        System.out.print("       Are you sure? [Y/N]: ");
+                        opt = inp.next();
+                        if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
+                            run = false;
+                            System.out.println("=======================================");
+                            break;
+                        }
+                        else if(Objects.equals(opt, "N") || Objects.equals(opt, "n")) {
+                            System.out.println("=======================================");
+                            continue;
+                        }
+                    case "E": case "e":
+                        System.out.println("=======================================");
+                        System.out.print("       Are you sure? [Y/N]: ");
+                        opt = inp.next();
+                        if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
+                            auth.delete(Authentication.getAuthenticatedUser());
+                            run = false;
+                            System.out.println("=======================================");
+                            break;
+                        }else if(Objects.equals(opt, "N") || Objects.equals(opt, "n")) {
+                            System.out.println("=======================================");
+                            continue;
+                        }
+                    default:
+                        throw new RuntimeException("Invalid");
                 }
-
-        }while(true);
-        }catch(InputMismatchException ex){
-            System.out.println("ERROR: " + ex.getMessage());
-        }catch (RuntimeException ex){
-            System.out.println("ERROR: " + ex.getMessage());
-        }
+            }catch(InputMismatchException ex){
+                System.out.println("ERROR: " + ex.getMessage());
+            }catch (RuntimeException ex){
+                System.out.println("ERROR: " + ex.getMessage());
+            }
+        } while (run);
+        loginMenu();
     }
 
     public void displayCars(){
