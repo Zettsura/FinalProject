@@ -53,7 +53,7 @@ public class Menu {
             System.out.println("| [2] Register    |");
             System.out.println("| [3] Exit        |");
             System.out.println("+-----------------+");
-            System.out.print("ENTER:");
+            System.out.print("ENTER: ");
                 try {
                     int opt = inp.nextInt();
                     switch (opt) {
@@ -99,6 +99,7 @@ public class Menu {
         System.out.println("++====================================================++");
         System.out.println("++====================================================++");
         while(true) {
+        System.out.println();
         System.out.println("       ++===================================++");
         System.out.println("       || [A]  Display Available Vehicles   ||");
         System.out.println("       || [B]  Search                       ||");
@@ -155,9 +156,9 @@ public class Menu {
             System.out.println("There are no available cars to rent at the moment.");
             return;
         }
-
+        printColumn();
         for (Vehicle v : availableVehicles){
-            System.out.format("%-15s%-10s%-10s%-15s%-25s%-15s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",i ,
+            System.out.format("%-5s%-10s%-15s%-15s%-25s%-10s%-15s%-15s%-10s%-15s%-15s%-15s%-15s%-15s%-15s%-10s%n",i ,
                     v.getCarType(),
                     v.getVehicleId(),
                     v.getCarBrand(),
@@ -202,7 +203,7 @@ public class Menu {
             VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
 
             System.out.println("\nThe vehicle that you rented is");
-            System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",
+            System.out.format("%-5s%-10s%-20s%-15s%-25s%-15s%-15s%-15s%-10s%-15s%-15s%-10s%-10s%-10s%-10s%n",
                     vehicleChoice.getCarType(),
                     vehicleChoice.getVehicleId(),
                     vehicleChoice.getCarBrand(),
@@ -223,9 +224,10 @@ public class Menu {
 
     public void printType(String type){
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
+        printColumn();
         for (Vehicle v : availableVehicles) {
             if (Objects.equals(v.getCarType(), type)) {
-                System.out.format("%-15s%-10s%-10s%-15s%-25s%-25s%-20s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n",
+                System.out.format("%-10s%-15s%-15s%-25s%-10s%-15s%-15s%-10s%-15s%-15s%-15s%-5s%-5s%-5s%n",
                         v.getCarType(),
                         v.getVehicleId(),
                         v.getCarBrand(),
@@ -248,7 +250,6 @@ public class Menu {
 
     public void filterCars(){
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
-        while(true) {
             System.out.println("Which type of car would you like to see:\n\t[1] Sedan\n\t[2] Van\n\t[3] Pick-up Truck");
             Scanner input = new Scanner(System.in);
             try {
@@ -256,12 +257,15 @@ public class Menu {
                 switch (choice) {
                     case 1:
                         printType("Sedan");
+                        System.out.println();
                         break;
                     case 2:
                         printType("Van");
+                        System.out.println();
                         break;
                     case 3:
                         printType("Pick-up Truck");
+                        System.out.println("");
                         break;
                     default:
                         throw new RuntimeException("Invalid");
@@ -271,8 +275,66 @@ public class Menu {
             } catch (RuntimeException ex){
                 System.out.println("ERROR: " + ex.getMessage());
             }
-        }
+    }
 
+    public void printColumn(){
+        String i = "#",
+                l= "",
+                CarType = "Car Type",
+                VehicleId = "Vehicle ID",
+                CarBrand = "Car Brand",
+                ModelId = "Model ID",
+                Color = "Color",
+                FuelType = "Fuel",
+                TransmissionType2 = "Transmission",
+                TransmissionType = "Type",
+                PassLim2 = "Passenger",
+                PassLim = "Limit",
+                MileageLim2 = "Mileage",
+                MileageLim = "Limit",
+                CanOffRoad2 = "Off Road",
+                CanOffRoad = "Capability",
+                TowingCap2 = "Towing",
+                TowingCap = "Capacity",
+                TruckBedCap2 = "Bed",
+                TruckBedCap = "Capacity",
+                Torque = "Torque",
+                StorageLim2 = "Storage ",
+                StorageLim = "Limit",
+                HasExtraSeats2 = "Extra ",
+                HasExtraSeats = "Seats";
+        System.out.print("========================================================================");
+        System.out.print("========================================================================");
+        System.out.println("========================================================================");
+        System.out.format("%-95s%-15s%-10s%-15s%-15s%-15s%-30s%-15s%s%n",
+                l,
+                TransmissionType2,
+                PassLim2,
+                MileageLim2,
+                CanOffRoad2,
+                TowingCap2,
+                TruckBedCap2,
+                StorageLim2,
+                HasExtraSeats2);
+        System.out.format("%-5s%-10s%-15s%-15s%-25s%-10s%-15s%-15s%-10s%-15s%-15s%-15s%-15s%-15s%-15s%-10s%n",i ,
+                CarType,
+                VehicleId,
+                CarBrand,
+                ModelId,
+                Color,
+                FuelType,
+                TransmissionType,
+                PassLim,
+                MileageLim,
+                CanOffRoad,
+                TowingCap,
+                TruckBedCap,
+                Torque,
+                StorageLim,
+                HasExtraSeats);
+        System.out.print("========================================================================");
+        System.out.print("========================================================================");
+        System.out.println("========================================================================");
     }
 }
 
