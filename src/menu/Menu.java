@@ -71,13 +71,13 @@ public class Menu {
         System.out.println("|| __________CCC        AAAAAAAAA   RRRRRRR           ||");
         System.out.println("||___________CCC      AA       AA  RR    RR           ||");
         System.out.println("|| __________CCCCCC AA         AA RR     RR           ||");
-        System.out.println("||                                                    ||");
-        System.out.println("||        RRRRRRR   EEEEEEE  NNN    NN TTTTTTTTTT     ||");
-        System.out.println("||       RR    RR  EE       NNNN   NN    TTTT         ||");
-        System.out.println("||      RR    RR  EEEEEEE  NN NN  NN    TTTT          ||");
-        System.out.println("||     RRRRRRR   EE       NN  NN NN    TTTT           ||");
-        System.out.println("||    RR    RR  EE       NN   NNNN    TTTT            ||");
-        System.out.println("||   RR     RR EEEEEEE  NN    NNN    TTTT             ||");
+        System.out.println("|| _                                                  ||");
+        System.out.println("||  --____RRRRRRR   EEEEEEE  NNN    NN TTTTTTTTTT     ||");
+        System.out.println("||--_____RR    RR  EE       NNNN   NN    TTTT         ||");
+        System.out.println("|| _____RR    RR  EEEEEEE  NN NN  NN    TTTT          ||");
+        System.out.println("||  ___RRRRRRR   EE       NN  NN NN    TTTT           ||");
+        System.out.println("||  __RR    RR  EE       NN   NNNN    TTTT            ||");
+        System.out.println("||  _RR     RR EEEEEEE  NN    NNN    TTTT             ||");
         System.out.println("||                                                    ||");
         System.out.println("++====================================================++");
         System.out.println("++====================================================++");
@@ -89,7 +89,7 @@ public class Menu {
         System.out.println("       || [D]  Log Out                      ||");
         System.out.println("       || [E]  Delete Account               ||");
         System.out.println("       ++===================================++");
-        System.out.println("               ENTER: ");
+        System.out.print("               ENTER: ");
             try{
             String opt = inp.next();
             switch (opt) {
