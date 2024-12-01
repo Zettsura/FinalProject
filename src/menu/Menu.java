@@ -125,7 +125,7 @@ public class Menu {
                     opt = inp.next();
                     if(Objects.equals(opt, "Y") || Objects.equals(opt, "y"))
                         loginMenu();
-                    else if(opt == "N" || opt == "n")
+                    else if(Objects.equals(opt, "N") || Objects.equals(opt, "n"))
                         continue;
                 case "E": case "e":
                     System.out.println("Are you sure? [Y/N]: ");
@@ -133,7 +133,7 @@ public class Menu {
                     if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
                         auth.delete(Authentication.getAuthenticatedUser());
                         loginMenu();
-                    }else if(opt == "N" || opt == "n")
+                    }else if(Objects.equals(opt, "N") || Objects.equals(opt, "n"))
                         continue;
                     break;
                 default:
@@ -188,37 +188,40 @@ public class Menu {
         }
 
         displayCars();
+        try {
+            System.out.printf("%nEnter the number of the vehicle that you would like to rent: ");
+            int choice = input.nextInt();
 
-        System.out.printf("%nEnter the number of the vehicle that you would like to rent: ");
-        int choice = input.nextInt();
+            if ((choice - 1) >= 0 && choice < availableVehicles.size()) {
+                Vehicle vehicleChoice = availableVehicles.get(choice - 1);
+                long vehicleId = vehicleChoice.getVehicleId();
 
-        if((choice-1) >= 0 && choice < availableVehicles.size()){
-            Vehicle vehicleChoice = availableVehicles.get(choice-1);
-            long vehicleId = vehicleChoice.getVehicleId();
+                rentVehicles.rentCar(vehicleId);
 
-            rentVehicles.rentCar(vehicleId);
+                rentVehicles.updateRentedVehicleList();
 
-            rentVehicles.updateRentedVehicleList();
-
-            VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
-
-            System.out.println("\nThe vehicle that you rented is");
-            System.out.format("%-5s%-10s%-20s%-15s%-25s%-15s%-15s%-15s%-10s%-15s%-15s%-10s%-10s%-10s%-10s%n",
-                    vehicleChoice.getCarType(),
-                    vehicleChoice.getVehicleId(),
-                    vehicleChoice.getCarBrand(),
-                    vehicleChoice.getModelId(),
-                    vehicleChoice.getColor(),
-                    vehicleChoice.getFuelType(),
-                    vehicleChoice.getTransmissionType(),
-                    vehicleChoice.getPassLim(),
-                    vehicleChoice.getMileageLim(),
-                    vehicleChoice.isCanOffRoad(),
-                    vehicleChoice.getTowingCap(),
-                    vehicleChoice.getTruckBedCap(),
-                    vehicleChoice.getTorque(),
-                    vehicleChoice.getStorageLim(),
-                    vehicleChoice.isHasExtraSeats());
+                VehicleFileHandler.save(rentVehicles.getRentedVehicleList());System.out.println("\nThe vehicle that you rented is");
+                System.out.format("%-5s%-10s%-20s%-15s%-25s%-15s%-15s%-15s%-10s%-15s%-15s%-10s%-10s%-10s%-10s%n",
+                        vehicleChoice.getCarType(),
+                        vehicleChoice.getVehicleId(),
+                        vehicleChoice.getCarBrand(),
+                        vehicleChoice.getModelId(),
+                        vehicleChoice.getColor(),
+                        vehicleChoice.getFuelType(),
+                        vehicleChoice.getTransmissionType(),
+                        vehicleChoice.getPassLim(),
+                        vehicleChoice.getMileageLim(),
+                        vehicleChoice.isCanOffRoad(),
+                        vehicleChoice.getTowingCap(),
+                        vehicleChoice.getTruckBedCap(),
+                        vehicleChoice.getTorque(),
+                        vehicleChoice.getStorageLim(),
+                        vehicleChoice.isHasExtraSeats());
+            }
+        }catch (InputMismatchException ex){
+            System.out.println("ERROR: " + ex.getMessage());
+        } catch (RuntimeException ex){
+            System.out.println("ERROR: " + ex.getMessage());
         }
     }
 
