@@ -11,21 +11,13 @@ public class Rent {
     private List<Vehicle> vehicleList;
     private List<Vehicle> availableVehicleList;
     private HashMap<Long, Vehicle> vehicleHashMap;
-    private java.time.LocalTime dateRented = java.time.LocalTime.now();
+    protected java.time.LocalTime dateRented = java.time.LocalTime.now();
 
     public Rent() {}
     public Rent(List<Vehicle> vehicles) {
         vehicleList = vehicles;
         availableVehicleList = vehicles.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
         vehicleHashMap = new HashMap<>(vehicles.stream().collect(Collectors.toMap(Vehicle::getVehicleId, vehicle -> vehicle)));
-    }
-
-    public void mileageLim(float miles){
-
-    }
-
-    public void calcPay(float miles){
-
     }
 
     public void rentCar(long vehicleId) {
@@ -43,18 +35,5 @@ public class Rent {
 
     public List<Vehicle> getRentedVehicleList(){
         return availableVehicleList;
-    }
-
-    public boolean checkAvailVehicle(Vehicle vehicleList){
-        if(!(vehicleList != vehicleList)) {
-            return true;
-        } else
-            return false;
-    }
-
-    public double getTotalPay(){
-        double pay = 0;
-
-        return pay;
     }
 }

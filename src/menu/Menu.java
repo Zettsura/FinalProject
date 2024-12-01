@@ -85,6 +85,7 @@ public class Menu {
 
 
     public void menuOptions(){
+        try{
         System.out.println("++====================================================++");
         System.out.println("++====================================================++");
         System.out.println("||   __                                               ||");
@@ -104,7 +105,7 @@ public class Menu {
         System.out.println("||                                                    ||");
         System.out.println("++====================================================++");
         System.out.println("++====================================================++");
-        while(true) {
+        do {
         System.out.println();
         System.out.println("       ++===================================++");
         System.out.println("       || [A]  Display Available Vehicles   ||");
@@ -114,8 +115,9 @@ public class Menu {
         System.out.println("       || [E]  Delete Account               ||");
         System.out.println("       ++===================================++");
         System.out.print("               ENTER: ");
-            try{
-            String opt = inp.next();
+            Scanner menuInp = new Scanner(System.in);
+            String opt ;
+            opt = menuInp.next();
             switch (opt) {
                 case "A": case "a":
                     displayCars();
@@ -127,29 +129,40 @@ public class Menu {
                     rentACar();
                     break;
                 case "D": case "d":
-                    System.out.print("Are you sure? [Y/N]: ");
+                    System.out.println("===================================");
+                    System.out.print(" Are you sure? [Y/N]: ");
                     opt = inp.next();
-                    if(Objects.equals(opt, "Y") || Objects.equals(opt, "y"))
+                    if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")){
+                        System.out.println("===================================\n");
                         loginMenu();
-                    else if(Objects.equals(opt, "N") || Objects.equals(opt, "n"))
+                    }
+                    else if(Objects.equals(opt, "N") || Objects.equals(opt, "n")){
+                        System.out.println("===================================\n");
                         continue;
+                    }
+                    break;
                 case "E": case "e":
+                    System.out.println("===================================");
                     System.out.print("Are you sure!? [Y/N]: ");
                     opt = inp.next();
                     if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
                         auth.delete(Authentication.getAuthenticatedUser());
+                        System.out.println("===================================\n");
                         loginMenu();
-                    }else if(Objects.equals(opt, "N") || Objects.equals(opt, "n"))
+                    }else if(Objects.equals(opt, "N") || Objects.equals(opt, "n")) {
+                        System.out.println("===================================\n");
                         continue;
+                    }
                     break;
                 default:
                     throw new RuntimeException("Invalid");
                 }
-            }catch(InputMismatchException ex){
-                System.out.println("ERROR: " + ex.getMessage());
-            }catch (RuntimeException ex){
-                System.out.println("ERROR: " + ex.getMessage());
-            }
+
+        }while(true);
+        }catch(InputMismatchException ex){
+            System.out.println("ERROR: " + ex.getMessage());
+        }catch (RuntimeException ex){
+            System.out.println("ERROR: " + ex.getMessage());
         }
     }
 
@@ -208,8 +221,8 @@ public class Menu {
 
         displayCars();
         try {
-            System.out.println("==============================================================\n");
-            System.out.printf(" Enter the number of the vehicle that you would like to rent: ");
+            System.out.println("==============================================================");
+            System.out.println(" Enter the number of the vehicle that you would like to rent: ");
             int choice = input.nextInt();
 
         if(choice >= 1 && choice <= availableVehicles.size()){
