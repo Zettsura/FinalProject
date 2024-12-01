@@ -81,19 +81,15 @@ public class Menu {
         System.out.println("||                                                    ||");
         System.out.println("++====================================================++");
         System.out.println("++====================================================++");
-
-
-
         while(true) {
-            System.out.println("++===================================++");
-            System.out.println("++===================================++");
-            System.out.println("|| [A]  Display Available Vehicles   ||");
-            System.out.println("|| [B]  Search                       ||");
-            System.out.println("|| [C]  Rent Car                     ||");
-            System.out.println("|| [D]  Log Out                      ||");
-            System.out.println("++===================================++");
-            System.out.println("++===================================++");
-            System.out.println("ENTER: ");
+        System.out.println("       ++===================================++");
+        System.out.println("       || [A]  Display Available Vehicles   ||");
+        System.out.println("       || [B]  Search                       ||");
+        System.out.println("       || [C]  Rent Car                     ||");
+        System.out.println("       || [D]  Log Out                      ||");
+        System.out.println("       || [E]  Delete Account               ||");
+        System.out.println("       ++===================================++");
+        System.out.println("               ENTER: ");
             try{
             String opt = inp.next();
             switch (opt) {
@@ -109,15 +105,18 @@ public class Menu {
                 case "D": case "d":
                     System.out.println("Are you sure? [Y/N]: ");
                     opt = inp.next();
-                    if (opt == "Y" || opt == "y")
-                        loginMenu();
-                    else if (opt == "N" || opt == "n")
                     if(Objects.equals(opt, "Y") || Objects.equals(opt, "y"))
-                        System.exit(0);
+                        loginMenu();
                     else if(opt == "N" || opt == "n")
                         continue;
                 case "E": case "e":
-                    auth.delete(Authentication.getAuthenticatedUser());
+                    System.out.println("Are you sure? [Y/N]: ");
+                    opt = inp.next();
+                    if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
+                        auth.delete(Authentication.getAuthenticatedUser());
+                        loginMenu();
+                    }else if(opt == "N" || opt == "n")
+                        continue;
                     break;
                 default:
                     throw new RuntimeException("Invalid");
@@ -229,21 +228,29 @@ public class Menu {
 
     public void filterCars(){
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
-        System.out.println("Which type of car would you like to see:\n\t[1] Sedan\n\t[2] Van\n\t[3] Pick-up Truck" );
-        Scanner input = new Scanner(System.in);
-
-        int choice = input.nextInt();
-
-        switch (choice){
-            case 1:
-                printType("Sedan");
-                break;
-            case 2:
-                printType("Van");
-                break;
-            case 3:
-                printType("Pick-up Truck");
-                break;
+        while(true) {
+            System.out.println("Which type of car would you like to see:\n\t[1] Sedan\n\t[2] Van\n\t[3] Pick-up Truck");
+            Scanner input = new Scanner(System.in);
+            try {
+                int choice = input.nextInt();
+                switch (choice) {
+                    case 1:
+                        printType("Sedan");
+                        break;
+                    case 2:
+                        printType("Van");
+                        break;
+                    case 3:
+                        printType("Pick-up Truck");
+                        break;
+                    default:
+                        throw new RuntimeException("Invalid");
+                }
+            } catch (InputMismatchException ex) {
+                System.out.println("ERROR: " + ex.getMessage());
+            } catch (RuntimeException ex){
+                System.out.println("ERROR: " + ex.getMessage());
+            }
         }
 
     }
