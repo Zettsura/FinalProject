@@ -15,7 +15,7 @@ public class Rent {
 
     public Rent() {}
     public Rent(List<Vehicle> vehicles) {
-        vehicleList = vehicles;
+        this.vehicleList = vehicles;
         availableVehicleList = vehicles.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
         vehicleHashMap = new HashMap<>(vehicles.stream().collect(Collectors.toMap(Vehicle::getVehicleId, vehicle -> vehicle)));
     }
@@ -35,5 +35,22 @@ public class Rent {
 
     public List<Vehicle> getRentedVehicleList(){
         return availableVehicleList;
+    }
+
+    public List<Vehicle> getAllVehicles() {
+        return vehicleList;
+    }
+
+    public boolean checkAvailVehicle(Vehicle vehicleList){
+        if(!(vehicleList != vehicleList)) {
+            return true;
+        } else
+            return false;
+    }
+
+    public double getTotalPay(){
+        double pay = 0;
+
+        return pay;
     }
 }
