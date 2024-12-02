@@ -1,5 +1,6 @@
 package menu;
 import file.VehicleFileHandler;
+import file.UserFileHandler;
 import vehicle.*;
 import rent.Rent;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Menu {
     public String opt;
     private Authentication auth;
     public Rent rentVehicles;
+    public User user;
 
     public Menu(List<Vehicle> vehicles, Authentication auth){
         this.rentVehicles = new Rent(vehicles);
@@ -200,9 +202,45 @@ public class Menu {
         System.out.println("========================================================================");
     }
 
+    private void updateUserList(long vehicleId){
+        UserFileHandler userFileHandler = new UserFileHandler();
+        user.setVehicleId(vehicleId);
+        List<User> userList = userFileHandler.load();
+        for (User u : userList){
+            if (u.getUserId() == user.getUserId()){
+                u.setVehicleId(vehicleId);
+                break;
+            }
+        }
+        UserFileHandler.save(userList);
+    }
+
+    public void returnCar(long vehicleId){
+        for (Vehicle v : rentVehicles.getRentedVehicleList()){
+            if(v.getVehicleId() == vehicleId){
+                v.setIsRented(false);
+                VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
+                System.out.println("Vehicle has been returned");
+                break;
+            }
+        }
+    }
+
     public void rentACar(){
         Scanner input = new Scanner(System.in);
+
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
+
+        if(user.getVehicleId() != 0){
+            System.out.println("You can only rent one vehicle at a time\nWould you like to return?[Y/N]");
+            String ch = input.nextLine();
+            if(Objects.equals(ch, "Y") || Objects.equals(ch, "y")) {
+                returnCar(user.getVehicleId());
+                updateUserList(0);
+                return;
+            }
+            return;
+        }
 
         if (availableVehicles.isEmpty()) {
             System.out.println("===================================================");
@@ -216,34 +254,36 @@ public class Menu {
             System.out.printf("Enter the number of the vehicle that you would like to rent: ");
             int choice = input.nextInt();
 
-            if ((choice - 1) >= 0 && choice < availableVehicles.size()) {
-                Vehicle vehicleChoice = availableVehicles.get(choice - 1);
-                long vehicleId = vehicleChoice.getVehicleId();
+        if(choice >= 1 && choice <= availableVehicles.size()){
+            Vehicle vehicleChoice = availableVehicles.get(choice-1);
+            long vehicleId = vehicleChoice.getVehicleId();
 
-                rentVehicles.rentCar(vehicleId);
+            rentVehicles.rentCar(vehicleId);
+            rentVehicles.updateRentedVehicleList();
 
-                rentVehicles.updateRentedVehicleList();
+            VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
 
-                VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
-                System.out.print("========================================================================");
-                System.out.println("\nThe vehicle that you rented is");
-                System.out.format("%-25s%s%n", this.carType, vehicleChoice.getCarType());
-                System.out.format("%-25s%s%n", this.vehicleId, vehicleChoice.getVehicleId());
-                System.out.format("%-25s%s%n", this.brand, vehicleChoice.getCarBrand());
-                System.out.format("%-25s%s%n", this.modelId, vehicleChoice.getModelId());
-                System.out.format("%-25s%s%n", this.color, vehicleChoice.getColor());
-                System.out.format("%-25s%s%n", this.fuelType, vehicleChoice.getFuelType());
-                System.out.format("%-25s%s%n", this.isAutomatic, vehicleChoice.getTransmissionType());
-                System.out.format("%-25s%s%n", this.passLim, vehicleChoice.getPassLim());
-                System.out.format("%-25s%s%n", this.mileageLim, vehicleChoice.getMileageLim());
-                System.out.format("%-25s%s%n", this.canOffRoad, vehicleChoice.isCanOffRoad() ? "Capable" : "Incapable");
-                System.out.format("%-25s%s%n", this.towingCap, vehicleChoice.getTowingCap() + " kg");
-                System.out.format("%-25s%s%n", this.truckBed, vehicleChoice.getTruckBedCap() + " kg");
-                System.out.format("%-25s%s%n", this.truckBed, vehicleChoice.getTorque() + " Nm");
-                System.out.format("%-25s%s%n", this.storageLim, vehicleChoice.getStorageLim() + " kg");
-                System.out.format("%-25s%s%n", this.extraSeats, vehicleChoice.isHasExtraSeats() ? "Available" : "Unavailable" );
+            updateUserList(vehicleId);
 
-            }else {throw new RuntimeException("Invalid");}
+            System.out.print("========================================================================");
+            System.out.println("\nThe vehicle that you rented is");
+            System.out.format("%-25s%s%n", this.carType, vehicleChoice.getCarType());
+            System.out.format("%-25s%s%n", this.vehicleId, vehicleChoice.getVehicleId());
+            System.out.format("%-25s%s%n", this.brand, vehicleChoice.getCarBrand());
+            System.out.format("%-25s%s%n", this.modelId, vehicleChoice.getModelId());
+            System.out.format("%-25s%s%n", this.color, vehicleChoice.getColor());
+            System.out.format("%-25s%s%n", this.fuelType, vehicleChoice.getFuelType());
+            System.out.format("%-25s%s%n", this.isAutomatic, vehicleChoice.getTransmissionType());
+            System.out.format("%-25s%s%n", this.passLim, vehicleChoice.getPassLim());
+            System.out.format("%-25s%s%n", this.mileageLim, vehicleChoice.getMileageLim());
+            System.out.format("%-25s%s%n", this.canOffRoad, vehicleChoice.isCanOffRoad() ? "Capable" : "Incapable");
+            System.out.format("%-25s%s%n", this.towingCap, vehicleChoice.getTowingCap() + " kg");
+            System.out.format("%-25s%s%n", this.truckBed, vehicleChoice.getTruckBedCap() + " kg");
+            System.out.format("%-25s%s%n", this.truckBed, vehicleChoice.getTorque() + " Nm");
+            System.out.format("%-25s%s%n", this.storageLim, vehicleChoice.getStorageLim() + " kg");
+            System.out.format("%-25s%s%n", this.extraSeats, vehicleChoice.isHasExtraSeats() ? "Available" : "Unavailable" );
+
+        }else {throw new RuntimeException("Invalid");}
         }catch (InputMismatchException ex){
             System.out.println("=======================================");
             System.out.println("ERROR: " + ex.getMessage());
