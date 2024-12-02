@@ -15,7 +15,8 @@ public class Rent {
 
     public Rent() {}
     public Rent(List<Vehicle> vehicles) {
-        this.vehicleList = vehicles;
+        vehicleList = vehicles;
+        availableVehicleList = vehicles.stream().filter(vehicle -> !vehicle.getIsRented()).toList();
         vehicleHashMap = new HashMap<>(vehicles.stream().collect(Collectors.toMap(Vehicle::getVehicleId, vehicle -> vehicle)));
     }
 
@@ -23,15 +24,6 @@ public class Rent {
         Vehicle vehicle = vehicleHashMap.get(vehicleId);
         if (vehicle != null) {
             vehicle.setIsRented(true);
-            Authentication.getAuthenticatedUser().setVehicleId(vehicleId);
-            updateRentedVehicleList();
-        }
-    }
-
-    public void returnCar(long vehicleId) {
-        Vehicle vehicle = vehicleHashMap.get(vehicleId);
-        if (vehicle != null) {
-            vehicle.setIsRented(false);
             Authentication.getAuthenticatedUser().setVehicleId(vehicleId);
             updateRentedVehicleList();
         }

@@ -202,43 +202,13 @@ public class Menu {
         System.out.println("========================================================================");
     }
 
-    private void updateUserList(long vehicleId){
-        UserFileHandler userFileHandler = new UserFileHandler();
-        user.setVehicleId(vehicleId);
-        List<User> userList = userFileHandler.load();
-        for (User u : userList){
-            if (u.getUserId() == user.getUserId()){
-                u.setVehicleId(vehicleId);
-                break;
-            }
-        }
-        UserFileHandler.save(userList);
-    }
-
-    public void returnCar(long vehicleId){
-        for (Vehicle v : rentVehicles.getRentedVehicleList()){
-            if(v.getVehicleId() == vehicleId){
-                v.setIsRented(false);
-                VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
-                System.out.println("Vehicle has been returned");
-                break;
-            }
-        }
-    }
-
     public void rentACar(){
         Scanner input = new Scanner(System.in);
-
+        UserFileHandler userFileHandler = new UserFileHandler();
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
 
         if(user.getVehicleId() != 0){
-            System.out.println("You can only rent one vehicle at a time\nWould you like to return?[Y/N]");
-            String ch = input.nextLine();
-            if(Objects.equals(ch, "Y") || Objects.equals(ch, "y")) {
-                returnCar(user.getVehicleId());
-                updateUserList(0);
-                return;
-            }
+            System.out.println("You can only rent one vehicle at a time");
             return;
         }
 
@@ -260,10 +230,18 @@ public class Menu {
 
             rentVehicles.rentCar(vehicleId);
             rentVehicles.updateRentedVehicleList();
-
+            user.setVehicleId(vehicleId);
             VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
 
-            updateUserList(vehicleId);
+            List<User> userList = userFileHandler.load();
+
+            for (User u : userList){
+                if (u.getUserId() == user.getUserId()){
+                    u.setVehicleId(vehicleId);
+                    break;
+                }
+            }
+            UserFileHandler.save(userList);
 
             System.out.print("========================================================================");
             System.out.println("\nThe vehicle that you rented is");
