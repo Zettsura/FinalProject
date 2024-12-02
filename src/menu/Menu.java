@@ -60,16 +60,17 @@ public class Menu {
             try {
                 String opt = inp.next();
                 switch (opt) {
-                    case "1":
+                    case "1"->{
                         auth.loginPrompt(inp);
                         this.user = Authentication.getAuthenticatedUser();
                         System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName() + "!");
                         menuOptions();
-                    case "2":
+                    }
+                    case "2"->{
                         auth.registerPrompt(inp);
-                        continue;
-                    case "3": System.exit(0);
-                    default: throw new RuntimeException("Invalid");
+                    }
+                    case "3"-> System.exit(0);
+                    default -> throw new RuntimeException("Invalid");
                 }
             } catch (AuthenticationException ex) {
                 System.out.println("ERROR: " + ex.getMessage());
