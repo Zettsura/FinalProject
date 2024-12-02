@@ -1,23 +1,23 @@
 package vehicle;
 
 public class Vehicle {
-    private long vehicleId;      // Id ng shop
-    private String carType;
-    private String carBrand;     //brand
+    private long vehicleId;             //Special ID for vehicle
+    private String carType;             //Sedan, Van, Pick-up Truck
+    private String carBrand;            //Brand
     private String modelId;
-    private String color;        // Red, White, Blue, Yellow, Black, Pink, Green
-    private String fuelType;     // Diesel, Unleaded, High Octane
-    private String transmissionType;
+    private String color;               // Red, White, Blue, Yellow, Black, Pink, Green
+    private String fuelType;            // Diesel, Unleaded, High Octane, Premium
+    private String transmissionType;    // Manual, Automatic
     private int passLim;
     private double mileageLim;
     private double basePrice;
     private boolean isRented;
     private boolean canOffRoad;
-    private double towingCap; //truck
-    private double truckBedCap; //truck
+    private double towingCap;           //truck
+    private double truckBedCap;         //truck
     private int torque;
     private int storageLim;
-    private boolean hasExtraSeats; //van
+    private boolean hasExtraSeats;       //van
 
     public Vehicle(){}
 
@@ -41,150 +41,65 @@ public class Vehicle {
         this.hasExtraSeats = hasExtraSeats;
     }
 
-    public long getVehicleId() {
-        return vehicleId;
-    }
+    public long getVehicleId() { return vehicleId;}
+    public void setVehicleId(long vehicleId) {this.vehicleId = vehicleId;}
 
     public String getCarType() {return carType;}
-
     public void setCarType(String carType) {this.carType = carType;}
 
-    public void setVehicleId(long vehicleId) {
-        this.vehicleId = vehicleId;
-    }
 
-    public String getCarBrand() {
-        return carBrand;
-    }
+    public String getCarBrand() {return carBrand;}
+    public void setCarBrand(String carBrand) {this.carBrand = carBrand;}
 
-    public void setCarBrand(String carBrand) {
-        this.carBrand = carBrand;
-    }
+    public String getModelId() {return modelId;}
+    public void setModelId(String modelId) {this.modelId = modelId;}
 
-    public String getModelId() {
-        return modelId;
-    }
+    public String getColor() {return color;}
+    public void setColor(String color) {this.color = color;}
 
-    public void setModelId(String modelId) {
-        this.modelId = modelId;
-    }
+    public String getFuelType() {return fuelType;}
+    public void setFuelType(String fuelType) {this.fuelType = fuelType;}
 
-    public String getColor() {
-        return color;
-    }
+    public String getTransmissionType() {return transmissionType;}
+    public void setTransmissionType(String transmissionType) {this.transmissionType = transmissionType;}
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+    public int getPassLim() {return passLim;}
+    public void setPassLim(int passLim) {this.passLim = passLim;}
 
-    public String getFuelType() {
-        return fuelType;
-    }
+    public double getMileageLim() {return mileageLim;}
+    public void setMileageLim(double mileageLim) {this.mileageLim = mileageLim;}
 
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
-    }
+    public double getBasePrice() {return basePrice;}
+    public void setBasePrice(double basePrice) {this.basePrice = basePrice;}
 
-    public String getTransmissionType() {
-        return transmissionType;
-    }
+    public boolean getIsRented() {return isRented;}
+    public void setIsRented(boolean rented) {isRented = rented;}
 
-    public void setTransmissionType(String transmissionType) {
-        this.transmissionType = transmissionType;
-    }
+    public boolean isCanOffRoad() {return canOffRoad;}
+    public void setCanOffRoad(boolean canOffRoad) {this.canOffRoad = canOffRoad;}
+    public boolean getCanOffRoad() {return this.canOffRoad;}
 
-    public int getPassLim() {
-        return passLim;
-    }
+    public double getTowingCap() {return this.towingCap;}
+    public void setTowingCap(double towingCap) {this.towingCap = towingCap;}
 
-    public void setPassLim(int passLim) {
-        this.passLim = passLim;
-    }
+    public double getTruckBedCap() {return this.truckBedCap;}
+    public void setTruckBedCap(double truckBedCap) {this.truckBedCap = truckBedCap;}
 
-    public double getMileageLim() {
-        return mileageLim;
-    }
+    public int getTorque() {return torque;}
+    public void setTorque(int torque) {this.torque = torque;}
 
-    public void setMileageLim(double mileageLim) {
-        this.mileageLim = mileageLim;
-    }
+    public int getStorageLim() {return storageLim;}
+    public void setStorageLim(int storageLim) {this.storageLim = storageLim;}
 
-    public double getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(double basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public boolean getIsRented() {
-        return isRented;
-    }
-
-    public void setIsRented(boolean rented) {
-        isRented = rented;
-    }
-
-    public boolean isCanOffRoad() {
-        return canOffRoad;
-    }
-
-    public void setCanOffRoad(boolean canOffRoad) {
-        this.canOffRoad = canOffRoad;
-    }
-    public boolean getCanOffRoad() {
-        return this.canOffRoad;
-    }
-
-    public double getTowingCap() {
-        return this.towingCap;
-    }
-
-    public void setTowingCap(double towingCap) {
-        this.towingCap = towingCap;
-    }
-
-    public double getTruckBedCap() {
-        return this.truckBedCap;
-    }
-
-    public void setTruckBedCap(double truckBedCap) {
-        this.truckBedCap = truckBedCap;
-    }
-
-    public int getTorque() {
-        return torque;
-    }
-
-    public void setTorque(int torque) {
-        this.torque = torque;
-    }
-
-    public int getStorageLim() {
-        return storageLim;
-    }
-
-    public void setStorageLim(int storageLim) {
-        this.storageLim = storageLim;
-    }
-
-    public boolean isHasExtraSeats() {
-        return hasExtraSeats;
-    }
-    public boolean getHasExtraSeats() {
-        return this.hasExtraSeats;
-    }
-
-    public void setHasExtraSeats(boolean hasExtraSeats) {
-        this.hasExtraSeats = hasExtraSeats;
-    }
+    public boolean isHasExtraSeats() {return hasExtraSeats;}
+    public boolean getHasExtraSeats() {return this.hasExtraSeats;}
+    public void setHasExtraSeats(boolean hasExtraSeats) {this.hasExtraSeats = hasExtraSeats;}
 
     public double rent(double mileageLim){//sedan
         if (mileageLim < 0)
             throw new IllegalArgumentException("Mileage limit is 0, that is wrong");
         if (mileageLim > 50)
             basePrice+=((mileageLim-50)*0.02);
-
         return basePrice;
     }
     public double rent(double mileageLim, boolean hasExtraSeats){ //van
@@ -194,7 +109,6 @@ public class Vehicle {
             basePrice+=((mileageLim-50)*0.02);
         if (hasExtraSeats)
             basePrice *= 1.4;
-
         return  basePrice;
     }
     public double rent(double mileageLim, double towingCap, double bedCap){ //truck
@@ -206,7 +120,8 @@ public class Vehicle {
             basePrice+=((towingCap-500)*0.05);
         if (bedCap > 1.33)
             basePrice+=((bedCap - 1.33)*0.05);
-
         return  basePrice;
     }
 }
+
+

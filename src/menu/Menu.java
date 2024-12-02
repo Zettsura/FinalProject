@@ -148,6 +148,8 @@ public class Menu {
                         if(Objects.equals(opt, "Y") || Objects.equals(opt, "y")) {
                             auth.delete(Authentication.getAuthenticatedUser());
                             run = false;
+                            System.out.println("=======================================");
+                            System.out.println("        Successfully Deleted");
                             System.out.println("=======================================\n");
                             break;
                         }else if(Objects.equals(opt, "N") || Objects.equals(opt, "n")) {
@@ -224,7 +226,7 @@ public class Menu {
 
         if(user.getVehicleId() != 0){
             System.out.println("=======================================");
-            System.out.print("\nYou can only rent one vehicle at a time\nWould you like to return it? [Y/N]: ");
+            System.out.print("You can only rent one vehicle at a time\nWould you like to return it? [Y/N]: ");
             String ch = input.next();
             if (Objects.equals(ch, "Y") || Objects.equals(ch, "y")) {
                 System.out.println("=======================================");

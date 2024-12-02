@@ -1,7 +1,6 @@
 package auth;
 
 import file.UserFileHandler;
-
 import java.util.List;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -91,7 +90,7 @@ public class Authentication {
         userList.add(user);
         userHashMap.put(user.getEmail(), user);
         UserFileHandler.save(userList);
-    };
+    }
 
     public void delete(User user) {
         userList.remove(user);
