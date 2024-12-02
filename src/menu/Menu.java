@@ -62,6 +62,7 @@ public class Menu {
                 switch (opt) {
                     case "1":
                         auth.loginPrompt(inp);
+                        this.user = Authentication.getAuthenticatedUser();
                         System.out.println("Welcome " + Authentication.getAuthenticatedUser().getName() + "!");
                         menuOptions();
                     case "2":
