@@ -108,7 +108,7 @@ public class Menu {
             System.out.println("       ++===================================++");
             System.out.println("       || [A]  Display Available Vehicles   ||");
             System.out.println("       || [B]  Search                       ||");
-            System.out.println("       || [C]  Rent Car                     ||");
+            System.out.println("       || [C]  Rent Car / Return Car        ||");
             System.out.println("       || [D]  Log Out                      ||");
             System.out.println("       || [E]  Delete Account               ||");
             System.out.println("       ++===================================++");
@@ -217,28 +217,22 @@ public class Menu {
         UserFileHandler.save(userList);
     }
 
-    public void returnCar(long vehicleId){
-        for (Vehicle v : rentVehicles.getAllVehicles()){
-            if(v.getVehicleId() == vehicleId){
-                v.setIsRented(false);
-                rentVehicles.updateRentedVehicleList();
-                VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
-                break;
-            }
-        }
-    }
-
     public void rentACar(){
         Scanner input = new Scanner(System.in);
         UserFileHandler userFileHandler = new UserFileHandler();
         List<Vehicle> availableVehicles = rentVehicles.getRentedVehicleList();
 
         if(user.getVehicleId() != 0){
-            System.out.println("You can only rent one vehicle at a time\nWould you like to return it? [Y/N]");
+            System.out.println("=======================================");
+            System.out.print("\nYou can only rent one vehicle at a time\nWould you like to return it? [Y/N]: ");
             String ch = input.next();
             if (Objects.equals(ch, "Y") || Objects.equals(ch, "y")) {
-                returnCar(user.getVehicleId());
+                System.out.println("=======================================");
+                rentVehicles.returnCar(user.getVehicleId());
                 updateUserList(0);
+                System.out.println("=======================================");
+                System.out.println(" Car has been successfully returned!");
+                System.out.println("=======================================");
                 return;
             }
             return;
@@ -264,7 +258,6 @@ public class Menu {
             rentVehicles.updateRentedVehicleList();
             user.setVehicleId(vehicleId);
             VehicleFileHandler.save(rentVehicles.getRentedVehicleList());
-
             List<User> userList = userFileHandler.load();
 
             updateUserList(vehicleId);

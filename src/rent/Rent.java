@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import auth.Authentication;
+import file.VehicleFileHandler;
 import vehicle.*;
 
 public class Rent {
@@ -41,16 +42,14 @@ public class Rent {
         return vehicleList;
     }
 
-    public boolean checkAvailVehicle(Vehicle vehicleList){
-        if(!(vehicleList != vehicleList)) {
-            return true;
-        } else
-            return false;
-    }
-
-    public double getTotalPay(){
-        double pay = 0;
-
-        return pay;
+    public void returnCar(long vehicleId){
+        for (Vehicle v : getAllVehicles()){
+            if(v.getVehicleId() == vehicleId){
+                v.setIsRented(false);
+                updateRentedVehicleList();
+                VehicleFileHandler.save(getRentedVehicleList());
+                break;
+            }
+        }
     }
 }
